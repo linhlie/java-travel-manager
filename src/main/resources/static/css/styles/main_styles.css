@@ -44,8 +44,8 @@
 @font-face
 {
 	font-family: 'Beyond';
-	src: url('/plugins/font-awesome-4.7.0/fonts/beyond_the_mountains.otf')  format('truetype');
-	src: url('/plugins/font-awesome-4.7.0/fonts/beyond_the_mountains.ttf')  format('opentype');
+	src: url('plugins/fonts/beyond_the_mountains.otf')  format('truetype'),
+		 url('plugins/fonts/beyond_the_mountains.ttf')  format('opentype');
 }
 
 /*********************************
@@ -522,6 +522,22 @@ section
 {
 	opacity: 1;
 }
+.dropdown>.dropdown-menu {
+	top: 200%;
+	transition: 0.3s all ease-in-out;
+	
+  }
+  .dropdown:hover>.dropdown-menu {
+	display: block;
+	top: 100%;
+	
+  }
+  
+  .dropdown>.dropdown-toggle:active {
+	/*Without this, clicking will make it sticky*/
+	  pointer-events: none;
+
+  }
 .content_search
 {
 	-webkit-transform: translateY(-1px);
@@ -2153,7 +2169,4 @@ section
 .footer_nav_item a:hover
 {
 	color: #FFFFFF;
-}
-.hidden {
-	display: none !important;
 }

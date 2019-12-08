@@ -1,11 +1,14 @@
 package travel.manager.model.admin;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "user")
+@Data
 public class User implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -114,6 +117,20 @@ public class User implements Serializable {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id='" + id + '\'' +
+				", email=" + email +
+				", phone=" + phone +
+				", full_name=" + fullName +
+				", created_at=" + createdAt +
+				", birthday=" + birthday +
+				", image_id=" + imageId +
+				", roles=" + roles +
+				'}';
 	}
 
 }

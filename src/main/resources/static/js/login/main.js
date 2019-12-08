@@ -2,15 +2,12 @@
 (function ($) {
     "use strict";
 
-
     /*==================================================================
     [ Validate ]*/
     var input = $('.validate-input .input100');
 
     $('.validate-form').on('submit',function(){
         var check = true;
-
-        console.log("test");
         for(var i=0; i<input.length; i++) {
             if(validate(input[i]) == false){
                 showValidate(input[i]);
@@ -20,7 +17,6 @@
 
         return check;
     });
-
 
     $('.validate-form .input100').each(function(){
         $(this).focus(function(){
