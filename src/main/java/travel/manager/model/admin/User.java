@@ -12,37 +12,25 @@ public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
+	@Column(name = "user_id", nullable = false)
 	private int id;
-	
-	@Column(name = "email", nullable = false, unique = true)
-	private String email;
-	
-	@Column(name = "password", nullable = false)
-	private String password;
+
+	@Column(name = "fullname", nullable = false)
+	private String fullname;
+
+	@Column(name = "address",nullable = false)
+	private String address;
 
 	@Column(name = "phone", nullable = false)
 	private String phone;
 
-	@Column(name = "full_name", nullable = false)
-	private String fullName;
+	@Column(name = "email", nullable = false, unique = true)
+	private String email;
 
-	@Column(name = "created_at")
-	private String createdAt;
-
-	@Column(name = "birthday")
-	private String birthday;
-
-	@Column(name = "image_id")
-	private Long imageId;
-	
-	@ManyToMany
-	@JoinTable(
-			name = "user_role",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
-	private Set<Role> roles;
+	@Column(name = "username", nullable = false)
+	private String username;
+	@Column(name = "password", nullable = false)
+	private String password;
 
 	public int getId() {
 		return id;
@@ -52,20 +40,20 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getFullName() {
+		return fullname;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setFullName(String fullName) {
+		this.fullname = fullName;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public String getPhone() {
@@ -76,37 +64,39 @@ public class User implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public String getCreatedAt() {
-		return createdAt;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public Long getImageId() {
-		return imageId;
-	}
+	@ManyToMany
+	@JoinTable(
+			name = "user_role",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
+	private Set<Role> roles;
 
-	public void setImageId(Long imageId) {
-		this.imageId = imageId;
-	}
+
 
 	public Set<Role> getRoles() {
 		return roles;

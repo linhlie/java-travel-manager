@@ -12,10 +12,10 @@ public class Role implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false)
+	@Column(name = "role_id", nullable = false)
 	private int id;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "role_name", nullable = false)
 	private String name;
 	
 	@ManyToMany(mappedBy = "roles")
