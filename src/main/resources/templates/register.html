@@ -4,7 +4,7 @@
 <head>
     <title>Login Travel</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
     <link rel="stylesheet" type="text/css"  th:href="@{css/vendor/bootstrap/css/bootstrap.min.css}">
@@ -20,55 +20,70 @@
 
 <div class="limiter">
     <div class="container-login100" style="background-image:url(images/home_slider.jpg)">
-        <div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
-            <form th:action="@{/register}" method="POST" class="login100-form validate-form">
-					<span class="login100-form-title p-b-55">
-						Login
+        <div class="wrap-login100 p-l-30 p-r-30 p-t-30 p-b-30">
+            <form th:action="@{/register}" th:object="${registerUser}" method="POST" class="login100-form validate-form">
+					<span class="login100-form-title p-b-30">
+						Sign Up
 					</span>
 
                 <div class="wrap-input100 validate-input m-b-16" data-validate = "Valid email is required: ex@abc.xyz">
-                    <input class="input100" type="text" name="email" placeholder="Email">
+                    <input class="input100" type="text" id="email" th:field="*{email}" name="email" placeholder="Email"/>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
 							<span class="lnr lnr-envelope"></span>
 						</span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                    <input class="input100" type="password" name="password" placeholder="Password">
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Valid Name is required: ex@abc.xyz">
+                    <input class="input100" type="text" id="fullName" th:field="*{fullName}" name="fullName" placeholder="Name"/>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
-                </div>
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                    <input class="input100" type="password" name="password" placeholder="Password">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
-                </div>
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                    <input class="input100" type="password" name="password" placeholder="Password">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
-						</span>
-                </div>
-                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-                    <input class="input100" type="password" name="password" placeholder="Password">
-                    <span class="focus-input100"></span>
-                    <span class="symbol-input100">
-							<span class="lnr lnr-lock"></span>
+							<i class="fa fa-users"></i>
 						</span>
                 </div>
 
-                <div class="container-login100-form-btn p-t-25">
-                    <button type="submit" class="login100-form-btn">
-                        Login
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+                    <input class="input100" type="password" id="password" th:field="*{password}" name="password" placeholder="Password"/>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<span class="lnr lnr-lock"></span>
+						</span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Confirm Password is required">
+                    <input class="input100" type="password" id="confirmPassword" th:field="*{confirmPassword}" name="confirmPassword" placeholder="Confirm Password"/>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<span class="lnr lnr-lock"></span>
+						</span>
+                </div>
+                <div class="wrap-input100 m-b-16" >
+                    <input class="input100" type="text" id="birthday" th:field="*{birthday}"name="birthday" placeholder="Birthday"/>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-birthday-cake"></i>
+						</span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Phone is required">
+                    <input class="input100" type="text" id="phone" th:field="*{phone}"name="phone" placeholder="Phone"/>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-mobile"></i>
+						</span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-16" data-validate = "Image Id is required">
+                    <input class="input100" type="text" id="imageId" th:field="*{imageId}"name="imageId" placeholder="Image Id"/>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+							<i class="fa fa-mobile"></i>
+						</span>
+                </div>
+
+                <div class="container-login100-form-btn p-t-20">
+                    <button type="submit" class="login100-form-btn" id="register">
+                        Sign Up
                     </button>
                 </div>
-
 
             </form>
         </div>
@@ -80,6 +95,5 @@
 <script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="css/vendor/select2/select2.min.js"></script>
 <script src="js/login/main.js"></script>
-
 </body>
 </html>
