@@ -10,30 +10,42 @@ import java.util.Set;
 @Table(name = "user")
 @Data
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "user_id", nullable = false)
+	@Column(name = "id", nullable = false)
 	private int id;
-
-	@Column(name = "fullname", nullable = false)
-	private String fullname;
-
-	@Column(name = "address",nullable = false)
-	private String address;
-
-	@Column(name = "phone", nullable = false)
-	private String phone;
 
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "username", nullable = false)
-	private String username;
 	@Column(name = "password", nullable = false)
 	private String password;
+
+	@Column(name = "phone", nullable = false)
+	private String phone;
+
+	@Column(name = "full_name", nullable = false)
+	private String fullName;
+
+	@Column(name = "created_at")
+	private String createdAt;
+
+	@Column(name = "birthday")
+	private String birthday;
+
+	@Column(name = "image_id")
+	private Long imageId;
+
+	@ManyToMany
+	@JoinTable(
+			name = "user_role",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id")
+	)
+	private Set<Role> roles;
 
 	public int getId() {
 		return id;
@@ -41,30 +53,6 @@ public class User implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getFullName() {
-		return fullname;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullname = fullName;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	public String getEmail() {
@@ -75,14 +63,6 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -91,15 +71,45 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	@ManyToMany
-	@JoinTable(
-			name = "user_role",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-	)
-	private Set<Role> roles;
+	public String getPhone() {
+		return phone;
+	}
 
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+	public Long getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
 
 	public Set<Role> getRoles() {
 		return roles;
@@ -122,5 +132,6 @@ public class User implements Serializable {
 				", roles=" + roles +
 				'}';
 	}
+
 
 }

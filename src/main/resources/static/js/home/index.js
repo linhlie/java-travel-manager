@@ -1,6 +1,4 @@
 (function () {
-    var result;
-    var userId=0;
     $(function () {
         loadListTours();
         var accountText = document.getElementById("account")

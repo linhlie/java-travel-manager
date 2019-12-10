@@ -56,6 +56,7 @@ public class MainController {
 
 	@GetMapping("/register")
 	public String registerPage(Model model) {
+
 		model.addAttribute("registerUser", new RegisterUser());
 		return "register";
 	}
