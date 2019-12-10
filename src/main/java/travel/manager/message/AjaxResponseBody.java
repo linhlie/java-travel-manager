@@ -1,11 +1,16 @@
 package travel.manager.message;
 
+import lombok.Data;
 import travel.manager.model.admin.User;
 import travel.manager.model.admin.UserDto;
+import travel.manager.model.home.Image;
+import travel.manager.model.home.News;
+import travel.manager.model.home.Place;
 import travel.manager.model.home.Tour;
 
 import java.util.List;
 
+@Data
 public class AjaxResponseBody {
 
     String msg;
@@ -16,6 +21,16 @@ public class AjaxResponseBody {
     private long userId;
     private UserDto userDto;
     private String jsonUser;
+    private List<Image>images;
+    private List<Image>imagesTours;
+    private List<Image>imagesPlaces;
+    private List<Image>imagesUsers;
+    private List<Place>places;
+    private List<News>news;
+
+
+
+
 
     public String getMsg() {
         return msg;
@@ -79,5 +94,13 @@ public class AjaxResponseBody {
 
     public void setJsonUser(String jsonUser) {
         this.jsonUser = jsonUser;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

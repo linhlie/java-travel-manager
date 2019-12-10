@@ -2,8 +2,8 @@ package travel.manager.repository.home;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import travel.manager.model.home.Place;
+import travel.manager.model.home.News;
 
 @Repository
-public interface PlaceRepository extends JpaRepository<Place,Integer> {
+public interface NewsRepository extends JpaRepository<News,Integer> {
 }
