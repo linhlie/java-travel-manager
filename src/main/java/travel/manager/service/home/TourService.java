@@ -11,7 +11,12 @@ import java.util.List;
 public class TourService {
     @Autowired
     private TourRepository tourRepository;
+
     public List<Tour> getAll(){
-        return tourRepository.findAll();
+        return tourRepository.findAlls();
+    }
+
+    public Tour findOne(long id) {
+        return tourRepository.findTourById(id);
     }
 }

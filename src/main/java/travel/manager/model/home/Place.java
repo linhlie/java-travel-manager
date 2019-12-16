@@ -19,6 +19,4 @@ public class Place {
     @Column(name = "place_summary")
     private String placeSummary;
 
-    @Column(name = "image_id")
-    private int imageId;
 }

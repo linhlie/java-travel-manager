@@ -12,10 +12,21 @@ public class HomeController {
     @Autowired
     PlaceService placeService;
 
-    @GetMapping("/offers")
-    public String viewOffers() {
-        return "home/offers";
+    @GetMapping("/tour")
+    public String vewTours() {
+        return "home/tour";
     }
+
+    @GetMapping("/tour-vi")
+    public String vewToursVN() {
+        return "home/tourVN";
+    }
+
+    @GetMapping("/tour-na")
+    public String vewToursNa() {
+        return "home/tourInternational";
+    }
+
     @GetMapping("/about")
     public String viewAbout() {
         return "home/about";
@@ -34,6 +45,21 @@ public class HomeController {
     @GetMapping("/cart")
     public String viewCart() {
         return "home/cart";
+    }
+
+    @GetMapping("/place")
+    public String viewPlace() {
+        return "home/place";
+    }
+
+    @GetMapping("/details.html")
+    public String viewTourDetails() {
+        return "home/tourdetails";
+    }
+
+    @GetMapping("/placedetails.html")
+    public String viewPlaceDetails() {
+        return "home/placedetails";
     }
 
 }

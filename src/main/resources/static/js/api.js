@@ -42,3 +42,8 @@ function getListNews(onSuccess, onError) {
     var url = "/news/list";
     _get(url, onSuccess, onError);
 }
+
+function getTourDetails(id, onSuccess, onError) {
+    var url = "/tours/"+id;
+    _get(url, onSuccess, onError);
+}

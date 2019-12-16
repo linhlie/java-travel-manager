@@ -3,6 +3,7 @@ package travel.manager.model.home;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,4 +19,7 @@ public class Image {
 
     @Column(name = "image_url")
     private String imageUrl;
+
+    @ManyToOne
+    private NewsImage newsImages;
 }

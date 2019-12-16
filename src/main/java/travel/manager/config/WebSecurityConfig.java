@@ -16,50 +16,50 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-	
-	@Autowired
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-	
-	@Override
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-		http
-				.authorizeRequests()
-				.antMatchers("/register","/all").permitAll()
-				.antMatchers("/order").hasRole("MEMBER")
-				.antMatchers("/admin","/admin/**").hasRole("ADMIN")
-				.and()
-				.formLogin()
-				.loginPage("/login")
-				.usernameParameter("email")
-				.passwordParameter("password")
-				.defaultSuccessUrl("/index")
-				.failureUrl("/login?error")
-				.and()
+        http
+                .authorizeRequests()
+                .antMatchers("/register","/all").permitAll()
+                .antMatchers("/order").hasRole("MEMBER")
+                .antMatchers("/admin","/admin/**").hasRole("ADMIN")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/index")
+                .failureUrl("/login?error")
+                .and()
 
-				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/index")
-				.permitAll()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/index")
+                .permitAll()
 
-				.and()
-				.exceptionHandling()
-				.accessDeniedPage("/403");
-		http.headers().frameOptions().sameOrigin();
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/403");
+        http.headers().frameOptions().sameOrigin();
     }
-	@Bean
-	public AuthenticationManager customAuthenticationManager() throws Exception {
-		return authenticationManager();
-	}
+    @Bean
+    public AuthenticationManager customAuthenticationManager() throws Exception {
+        return authenticationManager();
+    }
 
-	
+
 }

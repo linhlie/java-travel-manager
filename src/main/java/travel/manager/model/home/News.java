@@ -28,9 +28,10 @@ public class News {
     @Column(name = "create_at")
     private String createAt;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name="create_by")
     private int createByl;
 
-    @Column(name = "image_id")
-    private int imageId;
 }

@@ -25,4 +25,8 @@ public class UserService {
             return new UserDto( u.getId(),  u.getEmail(),  u.getPhone(),u.getFullName(), u.getCreatedAt(), u.getBirthday(), u.getImageId());
         }).collect(Collectors.toList());
     }
+
+    public User getUser(String email){
+        return userRepository.findByEmail(email);
+    }
 }

@@ -1169,8 +1169,8 @@ section
 .intro
 {
 	width: 100%;
-	padding-top: 100px;
-	padding-bottom: 105px;
+	padding-top: 80px;
+	padding-bottom: 60px;
 }
 .intro_title
 {
@@ -1424,13 +1424,13 @@ section
 .offers
 {
 	width: 100%;
-	padding-top: 105px;
+	padding-top: 90px;
 	padding-bottom: 43px;
 	background: #f3f6f9;
 }
 .offers_items
 {
-	margin-top: 90px;
+	margin-top: 70px;
 }
 .offers_col
 {
@@ -1552,8 +1552,8 @@ section
 .testimonials
 {
 	width: 100%;
-	padding-top: 105px;
-	padding-bottom: 105px;
+	padding-top: 90px;
+	padding-bottom: 95px;
 	background: #FFFFFF;
 }
 .test_border

@@ -5,11 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import travel.manager.message.AjaxResponseBody;
+import travel.manager.message.TourResponeBody;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.Image;
 import travel.manager.model.home.Place;
@@ -49,14 +47,16 @@ public class TourController {
 
     }
 
+
     @RequestMapping(value = { "/index/tours" ,"/tours"}, method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<?> getListDataTour(Principal principal) {
         AjaxResponseBody result = new AjaxResponseBody();
         try {
-            List<Tour> list = tourService.getAll();
-            if(!list.isEmpty()) {
-                result.setList(list);
+
+            List<Tour> tours = tourService.getAll();
+            if(!tours.isEmpty()) {
+                result.setTours(tours);
             }
 
             List<Image>imagesTours = imageService.getToursImages();
@@ -85,6 +85,22 @@ public class TourController {
                 }
             }catch (Exception e){}
 
+            result.setMsg("done");
+            result.setStatus(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setStatus(false);
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = { "/tours/{id}" }, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getTourDetails(@PathVariable("id") long id) {
+        TourResponeBody result = new TourResponeBody();
+        try {
+            Tour tour = tourService.findOne(id);
+            result.setTour(tour);
             result.setMsg("done");
             result.setStatus(true);
         } catch (Exception e) {

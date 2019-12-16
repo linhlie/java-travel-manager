@@ -10,17 +10,17 @@ import java.util.Set;
 @Table(name = "user")
 @Data
 public class User implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false)
 	private int id;
-	
+
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
-	
+
 	@Column(name = "password", nullable = false)
 	private String password;
 
@@ -38,7 +38,7 @@ public class User implements Serializable {
 
 	@Column(name = "image_id")
 	private Long imageId;
-	
+
 	@ManyToMany
 	@JoinTable(
 			name = "user_role",
@@ -132,5 +132,6 @@ public class User implements Serializable {
 				", roles=" + roles +
 				'}';
 	}
+
 
 }

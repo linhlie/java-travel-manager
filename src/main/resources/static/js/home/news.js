@@ -6,7 +6,7 @@
 
         function onSuccess(response) {
             if (response && response.status) {
-                console.log(response.news)
+                console.log(response)
             }
 
         }
@@ -17,4 +17,5 @@
 
         getListNews(onSuccess, onError);
     }
+
 })(jQuery);

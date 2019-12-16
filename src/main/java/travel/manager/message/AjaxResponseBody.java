@@ -1,12 +1,10 @@
 package travel.manager.message;
 
 import lombok.Data;
+import travel.manager.dto.ImageNewsDto;
 import travel.manager.model.admin.User;
 import travel.manager.model.admin.UserDto;
-import travel.manager.model.home.Image;
-import travel.manager.model.home.News;
-import travel.manager.model.home.Place;
-import travel.manager.model.home.Tour;
+import travel.manager.model.home.*;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
 public class AjaxResponseBody {
 
     String msg;
-    List<Tour> result;
+    private List<Tour> tours;
     private List list;
     private boolean status;
     private User user;
@@ -27,9 +25,10 @@ public class AjaxResponseBody {
     private List<Image>imagesUsers;
     private List<Place>places;
     private List<News>news;
-
-
-
+    private List<Object>imagesNews;
+    private List<ImageNewsDto>_imagesNews;
+    private List<NewsImage>newsImages;
+    private Tour tour;
 
 
     public String getMsg() {
@@ -38,14 +37,6 @@ public class AjaxResponseBody {
 
     public void setMsg(String msg) {
         this.msg = msg;
-    }
-
-    public List<Tour> getResult() {
-        return result;
-    }
-
-    public void setResult(List<Tour> result) {
-        this.result = result;
     }
 
     public List getList() {

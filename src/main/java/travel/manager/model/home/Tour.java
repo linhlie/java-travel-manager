@@ -11,31 +11,29 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "tour_id", nullable = false)
-    private Long tour_id;
+    private Long tourId;
 
     @Column(name = "category_tour_id")
-    private int category_tour_id;
+    private int categoryTourId;
 
     @Column(name = "place_id")
-    private int place_id;
+    private int placeId;
 
     @Column(name = "comment_id")
-    private int comment_id;
+    private int commentId;
 
-    private String tour_name;
+    private String tourName;
 
-    private String tour_summary;
+    private String tourSummary;
 
-    private String tour_content;
+    private String tourContent;
 
-    private String departure_date;
+    private String departureDate;
 
-    private int total_member;
+    private int totalMember;
 
     private float price;
 
     private float discount;
-
-    private int image_id;
 
 }

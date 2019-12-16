@@ -56,6 +56,7 @@ public class MainController {
 
 	@GetMapping("/register")
 	public String registerPage(Model model) {
+
 		model.addAttribute("registerUser", new RegisterUser());
 		return "register";
 	}
@@ -69,12 +70,10 @@ public class MainController {
 
 			result.setJsonUser(userRepository.findByEmail(loginedUser.getUsername()).toString());
 
-			System.out.println(result.getJsonUser());
 			result.setMsg("done");
 			result.setStatus(true);
 
 		}catch (Exception e){
-			System.out.println("fail");
 			result.setMsg(e.getMessage());
 			result.setStatus(false);
 		}
@@ -83,7 +82,7 @@ public class MainController {
 
 	@PostMapping("/register")
 	public String register(@Valid RegisterUser registerUser, Model model) {
-		System.out.println(registerUser.getEmail());
+		System.out.println(registerUser);
 		return "redirect:/login";
 	}
 
