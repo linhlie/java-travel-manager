@@ -9,13 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import travel.manager.message.AjaxResponseBody;
 import travel.manager.message.TourResponeBody;
 import travel.manager.model.admin.User;
-import travel.manager.model.home.Image;
-import travel.manager.model.home.Place;
-import travel.manager.model.home.Tour;
+import travel.manager.model.home.*;
 import travel.manager.service.admin.UserService;
-import travel.manager.service.home.ImageService;
-import travel.manager.service.home.PlaceService;
-import travel.manager.service.home.TourService;
+import travel.manager.service.home.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,7 +28,13 @@ public class TourController {
     private UserService userService;
 
     @Autowired
-    PlaceService placeService;
+    private PlaceService placeService;
+
+    @Autowired
+    private CommentService commentService;
+
+    @Autowired
+    private CategoryTourService categoryTourService;
 
     @GetMapping(value = {"/index","/"})
     public String index(Model model, Principal principal) {
@@ -85,7 +87,7 @@ public class TourController {
                 }
             }catch (Exception e){}
 
-            result.setMsg("done");
+            result.setMsg("Tour Data");
             result.setStatus(true);
         } catch (Exception e) {
             result.setMsg(e.getMessage());
@@ -99,9 +101,45 @@ public class TourController {
     public ResponseEntity<?> getTourDetails(@PathVariable("id") long id) {
         TourResponeBody result = new TourResponeBody();
         try {
+            List<Image>imagesTours = imageService.findImageByTourId(id);
+            result.setImagesTours(imagesTours);
+
             Tour tour = tourService.findOne(id);
             result.setTour(tour);
-            result.setMsg("done");
+
+            List<Comment>comments = commentService.getComments(Integer.parseInt(String.valueOf(id)));
+            result.setComments(comments);
+
+            result.setMsg("Tour detail data");
+            result.setStatus(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setStatus(false);
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = { "/tours/cate"}, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getCateTours() {
+        TourResponeBody result = new TourResponeBody();
+
+        List<CategoryTours>categoryTours =categoryTourService.getCateTours();
+        result.setCategoryTours(categoryTours);
+
+        result.setMsg("Cate Tours");
+        result.setStatus(true);
+        return ResponseEntity.ok(result);
+    }
+    @RequestMapping(value = { "/image/{id}" }, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getImage(@PathVariable("id") int id) {
+        TourResponeBody result = new TourResponeBody();
+        try {
+            Image image = imageService.getImage(id);
+            result.setImage(image);
+
+            result.setMsg("Image");
             result.setStatus(true);
         } catch (Exception e) {
             result.setMsg(e.getMessage());

@@ -70,6 +70,8 @@ public class MainController {
 
 			result.setJsonUser(userRepository.findByEmail(loginedUser.getUsername()).toString());
 
+			System.out.println();
+
 			result.setMsg("done");
 			result.setStatus(true);
 
@@ -80,10 +82,5 @@ public class MainController {
 		return ResponseEntity.ok(result);
 	}
 
-	@PostMapping("/register")
-	public String register(@Valid RegisterUser registerUser, Model model) {
-		System.out.println(registerUser);
-		return "redirect:/login";
-	}
 
 }

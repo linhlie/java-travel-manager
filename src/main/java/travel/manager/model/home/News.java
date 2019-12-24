@@ -13,9 +13,6 @@ public class News {
     @Column(name = "news_id")
     private int news_id;
 
-    @Column(name = "comment_id")
-    private int commentId;
-
     @Column(name = "category_news_id")
     private int category_newsId;
 

@@ -19,4 +19,16 @@ public class TourService {
     public Tour findOne(long id) {
         return tourRepository.findTourById(id);
     }
+
+    public List<Tour> getToursVN() {
+        return tourRepository.findAllToursVN();
+    }
+
+    public List<Tour> getToursNA() {
+        return tourRepository.findAllToursNA();
+    }
+
+    public List<Tour> getTourByPlace(int id) {
+        return tourRepository.findTourByIdPlace(id);
+    }
 }

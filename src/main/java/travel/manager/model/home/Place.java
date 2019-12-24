@@ -19,4 +19,7 @@ public class Place {
     @Column(name = "place_summary")
     private String placeSummary;
 
+    @Column(name = "place_content")
+    private String placeContent;
+
 }

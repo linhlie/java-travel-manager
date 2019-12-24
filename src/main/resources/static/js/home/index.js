@@ -4,9 +4,16 @@
     var htmlNews ="";
     $(function () {
         loadListTours();
+        loadListNews();
         var accountText = document.getElementById("account")
-        var account = accountText.textContent;
-        console.log(account)
+        if(accountText!=null){
+            var account = accountText.textContent;
+            console.log(account)
+            sessionStorage.setItem("login",account);
+        }
+        else {
+            sessionStorage.removeItem("login");
+        }
         if (account!=null){
             $('#login-form').addClass("hidden");
             $('#sign-up').addClass("hidden")
@@ -17,7 +24,22 @@
             $('#sign-up').removeClass("hidden")
             $('#logout').addClass("hidden")
         }
+        checkCart();
+
     });
+    function checkCart() {
+        var login = sessionStorage.getItem("login");
+        var string = localStorage.getItem(login);
+        var array  = [];
+        array = string.split(",");
+        console.log(array.length)
+        if (array.length>0){
+        var htmlCart= '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">'+array.length+'</span></span></a>'
+        }
+        console.log(htmlCart)
+        $(".test_cart").html(htmlCart);
+    }
+
 
     function loadListTours() {
 
@@ -41,7 +63,7 @@
                         '<h3 class="claimedRight" maxlength="20" style="font-weight:bold">'+list[i].tourName+'</h3>'+
                         '<div class="intro_price">$'+ list[i].price+'</div>'+
                         '<div class="rating rating_4">'+
-                        '<i class="fa fa-star"></i>'+
+                        '<is class="fa fa-star"></is>'+
                         '<i class="fa fa-star"></i>'+
                         '<i class="fa fa-star"></i>'+
                         '<i class="fa fa-star"></i>'+
@@ -65,7 +87,7 @@
                         '<div class="col-lg-6">'+
                         '<div class="offers_image_container">'+
                         '<div class="offers_image_background" style="background-image:url('+imagesPl[j].imageUrl+');width: 260px"></div>'+
-                        '<div class="offer_name"><a href="/placedetails.html">'+places[i].placeName+'</a></div>'+
+                        '<div class="offer_name places_id" data-id="'+places[i].placeId+'"><a href="/place-detail.html">'+places[i].placeName+'</a></div>'+
                     '</div></div>'+
                     '<div class="col-lg-6">'+
                         '<div class="offers_content">'+
@@ -79,7 +101,7 @@
                         '<li class="offers_icons_item"><img src="images/bicycle.png" alt=""></li>'+
                         '<li class="offers_icons_item"><img src="images/sailboat.png" alt=""></li>'+
                         '</ul></div>'+
-                        '<div class="offers_link"><a href="/placedetails.html">read more</a></div>'+
+                        '<div class="offers_link places_id "data-id="'+places[i].placeId+' " style="margin-top: 30px!important;"><a href="/place-detail.html">read more <i class="fa fa-angle-double-right"></i></a></div>'+
                     '</div></div></div></div></div>';
                     htmlPlaces+=htmlPl;
                     j+=3;
@@ -96,50 +118,54 @@
     }
 
     $(document).on("click",".test", function () {
-        console.log($("#testid").val())
         var dataId = $(this).attr("data-id");
         sessionStorage.setItem("dataId",dataId)
     });
 
-    // function loadListNews() {
-    //
-    //     function onSuccess(response) {
-    //         if (response && response.status) {
-    //             console.log(response)
-    //             var news =[];
-    //             var imagesNews =[];//images news
-    //             news = response.news;
-    //             console.log(news[1].name)
-    //             imagesNews = response._imagesNews;
-    //             for(var i=0;i<news.length;i++){
-    //                 var h = 0;
-    //                 var hmtlnew = '<div class="owl-item">'+
-    //                     '<div class="test_item">'+
-    //                     '<div class="test_image"><img src="'+imagesNews[h].image_url+'" alt="https://unsplash.com/@anniegray"></div>'+
-    //                     '<div class="test_icon"><img src="images/backpack.png" alt=""></div>'+
-    //                     '<div class="test_content_container">'+
-    //                     '<div class="test_content">'+
-    //                     '<div class="test_item_info">'+
-    //                     '<div class="test_name">'+news[i].name+'</div>'+
-    //                 '<div class="test_date">'+news[i].createAt+'</div>'+
-    //                 '</div>'+
-    //                 '<div class="test_quote_title">'+news[i].name+'</div>'+
-    //                     '<p class="test_quote_text">'+news[i].newsSummary+'</p>'+
-    //                 '</div></div></div></div>';
-    //                 htmlNews +=hmtlnew;
-    //                 h+=3;
-    //             }
-    //             $(".test_slider").html(hmtlnew);
-    //         }
-    //
-    //     }
-    //
-    //     function onError(error) {
-    //         console.error("load data fail!");
-    //     }
-    //
-    //     getListNews(onSuccess, onError);
-    // }
+    $(document).on("click",".places_id", function () {
+        var dataId = $(this).attr("data-id");
+        sessionStorage.setItem("placeId",dataId)
+    });
 
+    function loadListNews() {
+
+        function onSuccess(response) {
+            if (response && response.status) {
+                console.log(response)
+                var news =[];
+                news = response.news;
+                var image =[];
+                image = response._imagesNews;
+                var j =0;
+                for (var i =0;i<3;i++){
+                    var str = news[i].createAt;
+                    var res = str.split(" ", 1);
+                    var html = '<div class="footer_blog_item clearfix">'+
+                        '<div class="footer_blog_image"><img src="'+image[j].image_url+'" alt="https://unsplash.com/@avidenov"></div>'+
+                        '<div class="footer_blog_content">'+
+                        '<div class="footer_blog_title detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+news[i].name+'</a></div>'+
+                        '<div class="footer_blog_date">'+res+'</div>'+
+                        '</div>'+
+                        '</div>';
+
+                    htmlNews+=html;
+                    j+=3;
+                }
+
+                $(".footer_blog").html(htmlNews);
+            }
+
+        }
+
+        function onError(error) {
+            console.error("load data fail!");
+        }
+
+        getListNews(onSuccess, onError);
+    }
+    $(document).on("click",".detail_news", function () {
+        var dataId = $(this).attr("data-id");
+        sessionStorage.setItem("newsId",dataId)
+    });
 
 })(jQuery);

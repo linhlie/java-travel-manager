@@ -13,6 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles/blog_styles.css">
 	<link rel="stylesheet" type="text/css" href="css/styles/blog_responsive.css">
 	<link rel="stylesheet" type="text/css" href="css/styles/main_styles.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
 </head>
 
 <body>
@@ -35,14 +36,13 @@
 								<li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
 								<li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 								<li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-								<li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-								<li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-								<li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
 						<div class="user_box ml-auto">
-							<div class="user_box_login user_box_link"><a href="#">login</a></div>
-							<div class="user_box_register user_box_link"><a href="#">register</a></div>
+							<div id="login-form" class="user_box_login user_box_link"><a th:href="@{/login}">Login</a></div>
+							<div id="sign-up" class="user_box_register user_box_link"><a th:href="@{/register}">Sign up</a></div>
+							<div id="account" class="user_box_register user_box_link hidden profile"></div>
+							<div id="logout" class="user_box_register user_box_link hidden"><a th:href="@{/logout}">| Logout</a></div>
 						</div>
 					</div>
 				</div>
@@ -56,36 +56,33 @@
 				<div class="row">
 					<div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
 						<div class="logo_container">
-							<div class="logo"><a href="index.html"><img src="images/logo.png" alt="">travelix</a></div>
+							<div class="logo"><a th:href="@{index}"><img src="images/logo.png" alt="">travelix</a></div>
 						</div>
 						<div class="main_nav_container ml-auto">
 							<ul class="main_nav_list">
-								<li class="main_nav_item"><a href="index.html">Trang chủ</a></li>
-								<!-- <li class="main_nav_item"><a href="about.html">about us</a></li> -->
-								<!-- <li class="main_nav_item dropdown"><a href="#">Tour du lịch</a>
-
-								</li> -->
+								<li class="main_nav_item"><a th:href="@{index}">Trang chủ</a></li>
 								<li class="main_nav_item dropdown">
-									<a href="tour.html" id="navbardrop" data-toggle="dropdown">
-										<a href="tour.html">Tour du lịch</a>
+									<a th:href="@{tour}" id="navbardrop" data-toggle="dropdown">
+										<a th:href="@{tour}">Tour du lịch</a>
 									</a>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="TourVN.html" style="color: black;">Du lịch trong nước</a>
-										<a class="dropdown-item" href="TourInternational.html" style="color: black;">Du lịch quốc tế</a>
+										<a class="dropdown-item" th:href="@{tour-vi}" style="color: black;">Du lịch trong nước</a>
+										<a class="dropdown-item" th:href="@{tour-na}" style="color: black;">Du lịch quốc tế</a>
 									</div>
 								</li>
-								<li class="main_nav_item"><a href="place.html">Địa điểm</a></li>
+								<li class="main_nav_item"><a th:href="@{place}">Địa điểm</a></li>
 								<li class="main_nav_item dropdown">
-									<a href="news.html" id="navbardrop" data-toggle="dropdown">
-										<a href="news.html">Tin tức</a>
+									<a th:href="@{news}" id="navbardrop" data-toggle="dropdown">
+										<a th:href="@{news}">Tin tức</a>
 									</a>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="news.html" style="color: black;">Tin mới</a>
+										<a class="dropdown-item" th:href="@{news}" style="color: black;">Tin mới</a>
 										<a class="dropdown-item" href="#" style="color: black;">Cẩm nang du lịch</a>
 									</div>
 								</li>
-								<li class="main_nav_item"><a href="contact.html">Liên hệ</a></li>
-								<li class="main_nav_item"><a href="cart.html">Giỏ hàng</a></li>
+								<li class="main_nav_item"><a th:href="@{contact}">Liên hệ</a></li>
+								<li class="main_nav_item"><a th:href="@{cart}">Giỏ hàng</a></li>
+								<li class="main_nav_item test_cart"></li>
 							</ul>
 						</div>
 
@@ -108,11 +105,11 @@
 			<div class="menu_close_container"><div class="menu_close"></div></div>
 			<div class="logo menu_logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
 			<ul>
-				<li class="menu_item"><a href="index.html">home</a></li>
-				<li class="menu_item"><a href="about.html">about us</a></li>
-				<li class="menu_item"><a href="offers.html">offers</a></li>
-				<li class="menu_item"><a href="#">news</a></li>
-				<li class="menu_item"><a href="contact.html">contact</a></li>
+				<li class="menu_item"><a th:href="@{index}">home</a></li>
+				<li class="menu_item"><a th:href="@{about}">about us</a></li>
+				<li class="menu_item"><a th:href="@{tour}">tour</a></li>
+				<li class="menu_item"><a th:href="@{news}">news</a></li>
+				<li class="menu_item"><a th:href="@{contact}">contact</a></li>
 			</ul>
 		</div>
 	</div>
@@ -129,6 +126,10 @@
 	<!-- Blog -->
 
 	<div class="blog">
+		<div class="title" style="text-align: center" >
+			<h2 style="margin-bottom: 20px;font-weight: bold;color: cadetblue;">Khám phá thiên đường du lịch tại Travelix</h2>
+			<br>
+		</div>
 		<div class="container">
 			<div class="row">
 
@@ -141,145 +142,6 @@
 						<!-- Blog Post -->
 
 						<div class="blog_post">
-							<div class="blog_post_image">
-								<img src="images/blog_1.jpg" alt="https://unsplash.com/@anniespratt">
-								<div class="blog_post_date d-flex flex-column align-items-center justify-content-center">
-									<div class="blog_post_day">01</div>
-									<div class="blog_post_month">Dec, 2017</div>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-
-
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-										<img src="images/stats_1.png" alt="">
-									</div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_1.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Số người</div>
-												<div class="stats_type">Clients ádasdasđsadfdfsd</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-                                        <img src="images/stats_1.png" alt="">
-                                    </div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_2.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Địa điểm</div>
-												<div class="stats_type">Nơi đến: Sa Pa</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-                                        <img src="images/stats_1.png" alt="">
-                                    </div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_3.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Ngày đi</div>
-												<div class="stats_type">Khởi hành vào: 03.03.2013</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3">
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_1.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Ngày đi</div>
-												<div class="stats_type">Khởi hành vào: 03.03.2013</div>
-											</div>
-										</div>
-									</div>
-
-								</div>
-							</div>
-							<br>
-							<div class="row">
-
-
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-                                        <img src="images/stats_1.png" alt="">
-                                    </div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_2.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Số người</div>
-												<div class="stats_type">6</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-                                        <img src="images/stats_1.png" alt="">
-                                    </div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_3.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Địa điểm</div>
-												<div class="stats_type">Nơi đến: Sa Pa</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-3">
-									<!-- <div class="offers_icons_item">
-                                        <img src="images/stats_1.png" alt="">
-                                    </div> -->
-
-									<div class="stats_last order-md-1 order-3">
-										<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">
-											<img src="images/stats_1.png" alt="">
-
-											<div class="stats_last_content">
-												<div class="stats_type">Ngày đi</div>
-												<div class="stats_type">Khởi hành vào: 03.03.2013</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-lg-3">
-									<button type="button" class="btn btn-success">Book now</button>
-
-								</div>
-							</div>
-							<div class="blog_post_title"><a href="#">Tour Details</a></div>
-							<div class="blog_post_text">
-								<p>Aenean in lacus ligula. Phasellus euismod gravida eros. Aenean nec ipsum aliquet, pharetra magna id, interdum sapien. Etiam id lorem eu nisl pellentesque semper. Nullam tincidunt metus placerat, suscipit leo ut, tempus nulla. Fusce at eleifend tellus. Ut eleifend dui nunc, non fermentum qua.</p>
-							</div>
-							<div>
-								Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi iusto nulla velit facere reiciendis sint alias vero distinctio tempora laudantium, minima natus! Facere nulla perferendis quis neque, tenetur accusamus veniam.
-							</div>
 						</div>
 						<div class="card my-4">
 							<h5 class="card-header">Leave a Comment:</h5>
@@ -292,38 +154,9 @@
 								</form>
 							</div>
 						</div>
-						<div class="media mb-4">
-							<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-							</div>
+						<div class="comment">
+
 						</div>
-						<div class="media mb-4">
-							<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-							<div class="media-body">
-								<h5 class="mt-0">Commenter Name</h5>
-								Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-								<div class="media mt-4">
-									<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-									<div class="media-body">
-										<h5 class="mt-0">Commenter Name</h5>
-										Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-									</div>
-								</div>
-
-								<div class="media mt-4">
-									<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-									<div class="media-body">
-										<h5 class="mt-0">Commenter Name</h5>
-										Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-									</div>
-								</div>
-
-							</div>
-						</div>
-
 					</div>
 
 					<div class="blog_navigation">
@@ -384,15 +217,9 @@
 					<!-- Sidebar Archives -->
 					<div class="sidebar_categories">
 						<div class="sidebar_title">Categories</div>
-						<div class="sidebar_list">
-							<ul>
-								<li><a href="#">Travel</a></li>
-								<li><a href="#">Exotic Destinations</a></li>
-								<li><a href="#">City Breaks</a></li>
-								<li><a href="#">Travel Tips</a></li>
-								<li><a href="#">Lifestyle & Travel</a></li>
-								<li><a href="#">City Breaks</a></li>
-								<li><a href="#">Uncategorized</a></li>
+						<div class="sidebar_list ">
+							<ul class="cate_tours">
+
 							</ul>
 						</div>
 					</div>
@@ -400,65 +227,9 @@
 					<!-- Sidebar Latest Posts -->
 
 					<div class="sidebar_latest_posts">
-						<div class="sidebar_title">Latest Posts</div>
+						<div class="sidebar_title">Tin mới</div>
 						<div class="latest_posts_container">
-							<ul>
-
-								<!-- Latest Post -->
-								<li class="latest_post clearfix">
-									<div class="latest_post_image">
-										<a href="#"><img src="images/latest_1.jpg" alt=""></a>
-									</div>
-									<div class="latest_post_content">
-										<div class="latest_post_title trans_200"><a href="#">A simple blog post</a></div>
-										<div class="latest_post_meta">
-											<div class="latest_post_author trans_200"><a href="#">by Jane Smith</a></div>
-											<div class="latest_post_date trans_200"><a href="#">Aug 25, 2016</a></div>
-										</div>
-									</div>
-								</li>
-
-								<!-- Latest Post -->
-								<li class="latest_post clearfix">
-									<div class="latest_post_image">
-										<a href="#"><img src="images/latest_2.jpg" alt=""></a>
-									</div>
-									<div class="latest_post_content">
-										<div class="latest_post_title trans_200"><a href="#">Dream destination for you</a></div>
-										<div class="latest_post_meta">
-											<div class="latest_post_author trans_200"><a href="#">by Jane Smith</a></div>
-											<div class="latest_post_date trans_200"><a href="#">Aug 25, 2016</a></div>
-										</div>
-									</div>
-								</li>
-
-								<!-- Latest Post -->
-								<li class="latest_post clearfix">
-									<div class="latest_post_image">
-										<a href="#"><img src="images/latest_3.jpg" alt=""></a>
-									</div>
-									<div class="latest_post_content">
-										<div class="latest_post_title trans_200"><a href="#">Tips to travel light</a></div>
-										<div class="latest_post_meta">
-											<div class="latest_post_author trans_200"><a href="#">by Jane Smith</a></div>
-											<div class="latest_post_date trans_200"><a href="#">Aug 25, 2016</a></div>
-										</div>
-									</div>
-								</li>
-
-								<!-- Latest Post -->
-								<li class="latest_post clearfix">
-									<div class="latest_post_image">
-										<a href="#"><img src="images/latest_4.jpg" alt=""></a>
-									</div>
-									<div class="latest_post_content">
-										<div class="latest_post_title trans_200"><a href="#">How to pick your vacation</a></div>
-										<div class="latest_post_meta">
-											<div class="latest_post_author trans_200"><a href="#">by Jane Smith</a></div>
-											<div class="latest_post_date trans_200"><a href="#">Aug 25, 2016</a></div>
-										</div>
-									</div>
-								</li>
+							<ul class="list_news_ul">
 
 							</ul>
 						</div>
@@ -534,33 +305,6 @@
 						<div class="footer_title">blog posts</div>
 						<div class="footer_content footer_blog">
 
-							<!-- Footer blog item -->
-							<div class="footer_blog_item clearfix">
-								<div class="footer_blog_image"><img src="images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
-								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
-									<div class="footer_blog_date">Nov 29, 2017</div>
-								</div>
-							</div>
-
-							<!-- Footer blog item -->
-							<div class="footer_blog_item clearfix">
-								<div class="footer_blog_image"><img src="images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
-								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
-									<div class="footer_blog_date">Nov 29, 2017</div>
-								</div>
-							</div>
-
-							<!-- Footer blog item -->
-							<div class="footer_blog_item clearfix">
-								<div class="footer_blog_image"><img src="images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
-								<div class="footer_blog_content">
-									<div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
-									<div class="footer_blog_date">Nov 29, 2017</div>
-								</div>
-							</div>
-
 						</div>
 					</div>
 				</div>
@@ -606,11 +350,11 @@
 					<div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
 						<div class="footer_nav">
 							<ul class="footer_nav_list">
-								<li class="footer_nav_item"><a href="index.html">home</a></li>
-								<li class="footer_nav_item"><a href="about.html">about us</a></li>
-								<li class="footer_nav_item"><a href="offers.html">offers</a></li>
-								<li class="footer_nav_item"><a href="#">news</a></li>
-								<li class="footer_nav_item"><a href="contact.html">contact</a></li>
+								<li class="footer_nav_item"><a th:href="@{index}">home</a></li>
+								<li class="footer_nav_item"><a th:href="@{about}">about us</a></li>
+								<li class="footer_nav_item"><a th:href="@{offers}">offers</a></li>
+								<li class="footer_nav_item"><a th:href="@{news}">news</a></li>
+								<li class="footer_nav_item"><a th:href="@{contact}">contact</a></li>
 							</ul>
 						</div>
 					</div>
@@ -627,6 +371,8 @@
 <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
 <script src="plugins/js/parallax.min.js"></script>
 <script src="plugins/js/blog_custom.js"></script>
+<script src="js/home/tourDetails.js"></script>
+<script src="js/api.js"></script>
 
 </body>
 

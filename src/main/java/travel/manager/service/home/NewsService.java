@@ -15,4 +15,7 @@ public class NewsService{
         return newsRepository.findAll();
     }
 
+    public News getNews(int id) {
+        return newsRepository.getNews(id);
+    }
 }

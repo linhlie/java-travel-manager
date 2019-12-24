@@ -19,6 +19,8 @@ public class ImageService {
     }
     public List<Image> getToursImages(){
         return imageRepository.findByTourId();
+    }public List<Image> getToursImagesVN(){
+        return imageRepository.findImageToursVN();
     }
     public List<Image> getPlaceImages(){
         return imageRepository.findByPlaces();
@@ -39,5 +41,29 @@ public class ImageService {
         }
 
         return imageNewsDtos;
+    }
+
+    public List<Image> findImageByTourId(long id) {
+        return imageRepository.findImageByTourId(id);
+    }
+
+    public List<Image> getImageUserComments() {
+        return imageRepository.getImagesUsersComment();
+    }
+
+    public List<Image> getToursImagesNA() {
+        return imageRepository.findImageToursNA();
+    }
+
+    public List<Image> getImagePlace(int id) {
+        return imageRepository.findImageByPlaceId(id);
+    }
+
+    public List<Image> getImageNews(int id) {
+        return imageRepository.findImageByNewsId(id);
+    }
+
+    public Image getImage(int id) {
+        return imageRepository.findById(id);
     }
 }

@@ -5,15 +5,15 @@
     <title>Profile</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="Travelix Project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="plugins/bootstrap4/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="css/styles/blog_styles.css">
-    <link rel="stylesheet" type="text/css" href="css/styles/blog_responsive.css">
     <link rel="stylesheet" type="text/css" href="css/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="css/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
 
 </head>
 
@@ -37,14 +37,13 @@
                                 <li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
                                 <li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                                <li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
-                                <li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                         <div class="user_box ml-auto">
-                            <div class="user_box_login user_box_link"><a href="#">login</a></div>
-                            <div class="user_box_register user_box_link"><a href="#">register</a></div>
+                            <div id="login-form" class="user_box_login user_box_link"><a th:href="@{/login}">Login</a></div>
+                            <div id="sign-up" class="user_box_register user_box_link"><a th:href="@{/register}">Sign up</a></div>
+                            <div id="account" class="user_box_register user_box_link hidden profile"></div>
+                            <div id="logout" class="user_box_register user_box_link hidden"><a th:href="@{/logout}">| Logout</a></div>
                         </div>
                     </div>
                 </div>
@@ -58,43 +57,35 @@
                 <div class="row">
                     <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
                         <div class="logo_container">
-                            <div class="logo"><a href="index.html"><img src="images/logo.png" alt="">travelix</a></div>
+                            <div class="logo"><a th:href="@{/index}"><img src="images/logo.png" alt="">travelix</a></div>
                         </div>
                         <div class="main_nav_container ml-auto">
                             <ul class="main_nav_list">
-                                <li class="main_nav_item"><a href="index.html">Trang chủ</a></li>
-
-                                </li> -->
+                                <li class="main_nav_item"><a th:href="@{/index}">Trang chủ</a></li>
+                                </li>
                                 <li class="main_nav_item dropdown">
-                                    <a href="tour.html" id="navbardrop" data-toggle="dropdown">
-                                        <a href="tour.html">Tour du lịch</a>
+                                    <a th:href="@{/tour}" id="navbardrop" data-toggle="dropdown">
+                                        <a th:href="@{/tour}">Tour du lịch</a>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="TourVN.html" style="color: black;">Du lịch trong nước</a>
-                                        <a class="dropdown-item" href="TourInternational.html" style="color: black;">Du lịch quốc tế</a>
+                                        <a class="dropdown-item" th:href="@{/tour-vi}" style="color: black;">Du lịch trong nước</a>
+                                        <a class="dropdown-item" th:href="@{/tour-na}" style="color: black;">Du lịch quốc tế</a>
                                     </div>
                                 </li>
-                                <li class="main_nav_item"><a href="place.html">Địa điểm</a></li>
+                                <li class="main_nav_item"><a th:href="@{/place}">Địa điểm</a></li>
                                 <li class="main_nav_item dropdown">
-                                    <a href="news.html" id="navbardrop" data-toggle="dropdown">
-                                        <a href="news.html">Tin tức</a>
+                                    <a th:href="@{/news}" id="navbardrop" data-toggle="dropdown">
+                                        <a th:href="@{/news}">Tin tức</a>
                                     </a>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="news.html" style="color: black;">Tin mới</a>
+                                        <a class="dropdown-item" th:href="@{/news}" style="color: black;">Tin mới</a>
                                         <a class="dropdown-item" href="#" style="color: black;">Cẩm nang du lịch</a>
                                     </div>
                                 </li>
-                                <li class="main_nav_item"><a href="contact.html">Liên hệ</a></li>
-                                <li class="main_nav_item"><a href="cart.html">Giỏ hàng</a></li>
+                                <li class="main_nav_item"><a th:href="@{/contact}">Liên hệ</a></li>
+                                <li class="main_nav_item"><a th:href="@{/cart}">Giỏ hàng</a></li>
+                                <li class="main_nav_item test_cart"></li>
                             </ul>
-                        </div>
-
-                        <form id="search_form" class="search_form bez_1">
-                            <input type="search" class="search_content_input bez_1">
-                        </form>
-
-                        <div class="hamburger">
-                            <i class="fa fa-bars trans_200"></i>
                         </div>
                     </div>
                 </div>
@@ -108,265 +99,78 @@
             <div class="menu_close_container"><div class="menu_close"></div></div>
             <div class="logo menu_logo"><a href="#"><img src="images/logo.png" alt=""></a></div>
             <ul>
-                <li class="menu_item"><a href="index.html">home</a></li>
-                <li class="menu_item"><a href="about.html">about us</a></li>
-                <li class="menu_item"><a href="tourInternational.html">offers</a></li>
-                <li class="menu_item"><a href="#">news</a></li>
-                <li class="menu_item"><a href="contact.html">contact</a></li>
+                <li class="menu_item"><a th:href="@{/index}">home</a></li>
+                <li class="menu_item"><a th:href="@{/about}">about us</a></li>
+                <li class="menu_item"><a th:href="@{/tour}">tour</a></li>
+                <li class="menu_item"><a th:href="@{/news}">news</a></li>
+                <li class="menu_item"><a th:href="@{/contact}">contact</a></li>
             </ul>
         </div>
     </div>
 
     <!-- Home -->
-
-
-
     <!-- Blog -->
 
-    <div class="blog">
+    <div class="blog" style="margin-top: 200px;">
         <div class="container">
-            <div class="row mt-5">
-
-            </div>
             <div class="row mt-5">
                 <div class="col-sm-3"><!--left col-->
 
+                    <div class="profile-image">
 
-                    <div class="text-center">
-                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                        <br> <br>
-                        <h4>Username</h4>
-                        <h6>Upload a different photo...</h6>
-                        <input type="file" class="text-center center-block file-upload">
-                    </div></hr><br> <br>
+                    </div>
 
-
-
-
-
-
+                    </hr>
+                    <br>
+                    <br>
                 </div><!--/col-3-->
                 <div class="col-sm-9">
-
-
                     <div class="tab-content">
                         <div class="tab-pane active" id="home">
                             <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
+                            <div th:if="${message}">
+                                <span th:text="${message}"/>
+                            </div>
+                            <form th:action="@{/user/update}" th:object="${userRequest}" method="POST"class="validate-form" >
+                                <div class="form-group validate-input" >
                                     <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                                        <label for="id"><h4>ID</h4></label>
+                                        <input type="text" class="form-control" name="id" th:field="*{id}" id="id"readonly>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
+                                <div class="form-group validate-input"  data-validate = "Không bỏ trống trường này ">
                                     <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                                        <label for="fullName"><h4>Tên</h4></label>
+                                        <input type="text" class="form-control" name="fullName" th:field="*{fullName}" id="fullName" placeholder="Full name" required>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
+                                <div class="form-group validate-input"  data-validate = "Không bỏ trống trường này ">
                                     <div class="col-xs-6">
                                         <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
+                                        <input type="email" class="form-control" name="email" th:field="*{email}" id="email" placeholder="you@email.com" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
+                                <div class="form-group validate-input"  data-validate = "Không bỏ trống trường này ">
                                     <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                        <label for="phone"><h4>Số điện thoại</h4></label>
+                                        <input type="mobile" class="form-control" name="phone"th:field="*{phone}"  id="phone" placeholder="enter mobile number" required>
                                     </div>
                                 </div>
-                                <div class="form-group">
-
+                                <div class="form-group validate-input"  data-validate = "Không bỏ trống trường này ">
                                     <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                                        <label for="birthday"><h4>Ngày sinh</h4></label>
+                                        <input type="birthday" class="form-control" name="birthday"th:field="*{birthday}"  id="birthday" placeholder="DD/MM/YY">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-xs-12">
                                         <br>
-                                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+                                        <button class="btn btn-lg save-profile" type=""  value="Update"><i class="glyphicon glyphicon-ok-sign" ></i> Update</button>
                                     </div>
                                 </div>
                             </form>
-
                             <hr>
-
                         </div><!--/tab-pane-->
-                        <div class="tab-pane" id="messages">
-
-                            <h2></h2>
-
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <br>
-                                        <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                        <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div><!--/tab-pane-->
-                        <div class="tab-pane" id="settings">
-
-
-                            <hr>
-                            <form class="form" action="##" method="post" id="registrationForm">
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="first_name"><h4>First name</h4></label>
-                                        <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="last_name"><h4>Last name</h4></label>
-                                        <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="phone"><h4>Phone</h4></label>
-                                        <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="mobile"><h4>Mobile</h4></label>
-                                        <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Email</h4></label>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="enter your email.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="email"><h4>Location</h4></label>
-                                        <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password"><h4>Password</h4></label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-
-                                    <div class="col-xs-6">
-                                        <label for="password2"><h4>Verify</h4></label>
-                                        <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-xs-12">
-                                        <br>
-                                        <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                                        <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
                     </div><!--/tab-pane-->
                 </div><!--/tab-content-->
 
@@ -388,8 +192,6 @@
                                 <div class="logo"><a href="#"><img src="images/logo.png" alt="">travelix</a></div>
                             </div>
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.3118339648245!2d105.79362951527699!3d20.98013358602478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc508f938fd%3A0x883e474806a2d1f2!2zSOG7jWMgdmnhu4duIEvhu7kgdGh14bqtdCBN4bqtdCBtw6M!5e0!3m2!1svi!2s!4v1569922192087!5m2!1svi!2s" width="500" height="274" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                            <!-- <p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer eleme ntum orci eu vehicula pretium.</p> -->
-
                         </div>
                     </div>
                 </div>
@@ -400,32 +202,6 @@
                         <div class="footer_title">blog posts</div>
                         <div class="footer_content footer_blog">
 
-                            <!-- Footer blog item -->
-                            <div class="footer_blog_item clearfix">
-                                <div class="footer_blog_image"><img src="images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
-                                <div class="footer_blog_content">
-                                    <div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
-                                    <div class="footer_blog_date">Nov 29, 2017</div>
-                                </div>
-                            </div>
-
-                            <!-- Footer blog item -->
-                            <div class="footer_blog_item clearfix">
-                                <div class="footer_blog_image"><img src="images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
-                                <div class="footer_blog_content">
-                                    <div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
-                                    <div class="footer_blog_date">Nov 29, 2017</div>
-                                </div>
-                            </div>
-
-                            <!-- Footer blog item -->
-                            <div class="footer_blog_item clearfix">
-                                <div class="footer_blog_image"><img src="images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
-                                <div class="footer_blog_content">
-                                    <div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
-                                    <div class="footer_blog_date">Nov 29, 2017</div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -452,7 +228,7 @@
                                 </li>
                                 <li class="contact_info_item d-flex flex-row">
                                     <div><div class="contact_info_icon"><img src="images/planet-earth.svg" alt=""></div></div>
-                                    <div class="contact_info_text"><a href="https://colorlib.com">www.colorlib.com</a></div>
+                                    <div class="contact_info_text"><a href="/contact">travel.com.vn</a></div>
                                 </li>
                             </ul>
                         </div>
@@ -469,21 +245,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 order-lg-1 order-2  ">
-                    <div class="copyright_content d-flex flex-row align-items-center">
-                        <div><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-                    </div>
                 </div>
                 <div class="col-lg-9 order-lg-2 order-1">
                     <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
                         <div class="footer_nav">
                             <ul class="footer_nav_list">
-                                <li class="footer_nav_item"><a href="index.html">home</a></li>
-                                <li class="footer_nav_item"><a href="about.html">about us</a></li>
-                                <li class="footer_nav_item"><a href="tourInternational.html">offers</a></li>
-                                <li class="footer_nav_item"><a href="#">news</a></li>
-                                <li class="footer_nav_item"><a href="contact.html">contact</a></li>
+                                <li class="footer_nav_item"><a th:href="@{/index}">home</a></li>
+                                <li class="footer_nav_item"><a th:href="@{/about}">about us</a></li>
+                                <li class="footer_nav_item"><a th:href="@{/tour}">tour</a></li>
+                                <li class="footer_nav_item"><a th:href="@{/news}">news</a></li>
+                                <li class="footer_nav_item"><a th:href="@{/contact}">contact</a></li>
                             </ul>
                         </div>
                     </div>
@@ -499,29 +270,9 @@
 <script src="plugins/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
 <script src="plugins/js/parallax.min.js"></script>
-<script src="plugins/js/blog_custom.js"></script>
-<script>
-    $(document).ready(function() {
+<script src="/js/api.js"></script>
+<script src="js/home/profile.js"></script>
 
-
-        var readURL = function(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('.avatar').attr('src', e.target.result);
-                }
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-
-        $(".file-upload").on('change', function(){
-            readURL(this);
-        });
-    });
-</script>
 
 
 </body>

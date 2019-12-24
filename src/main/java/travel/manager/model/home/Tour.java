@@ -36,4 +36,6 @@ public class Tour {
 
     private float discount;
 
+    private int totalDays;
+
 }

@@ -1,8 +1,12 @@
 package travel.manager.controller.home;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import travel.manager.dto.UserRequest;
+import travel.manager.model.admin.RegisterUser;
 import travel.manager.service.home.PlaceService;
 
 
@@ -57,9 +61,21 @@ public class HomeController {
         return "home/tourdetails";
     }
 
-    @GetMapping("/placedetails.html")
+    @GetMapping("/place-detail.html")
     public String viewPlaceDetails() {
         return "home/placedetails";
+    }
+
+    @GetMapping("/news-detail")
+    public String viewNewsDetails() {
+        return "home/newsdetails";
+    }
+
+    @GetMapping("/profile")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
+    public String viewNewsProfile(Model model) {
+        model.addAttribute("userRequest", new UserRequest());
+        return "home/profile";
     }
 
 }

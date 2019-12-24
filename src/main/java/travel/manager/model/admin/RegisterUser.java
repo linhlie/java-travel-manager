@@ -14,9 +14,8 @@ public class RegisterUser {
 
     private String fullName;
 
-    private String createdAt;
-
     private String birthday;
 
     private Long imageId;
+
 }

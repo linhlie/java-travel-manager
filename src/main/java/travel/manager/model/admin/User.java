@@ -119,19 +119,37 @@ public class User implements Serializable {
 		this.roles = roles;
 	}
 
-	@Override
-	public String toString() {
-		return "User{" +
-				"id='" + id + '\'' +
-				", email=" + email +
-				", phone=" + phone +
-				", full_name=" + fullName +
-				", created_at=" + createdAt +
-				", birthday=" + birthday +
-				", image_id=" + imageId +
-				", roles=" + roles +
-				'}';
+	public User(int id,String email, String password, String phone, String fullName, String birthday, Long imageId, Set<Role> roles) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.imageId = imageId;
+		this.roles = roles;
 	}
 
+	public User() {
+	}
+
+	public User(String email, String password, String phone, String fullName, String birthday, Long imageId) {
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.imageId = imageId;
+	}
+
+	@Override
+	public String toString() {
+		return + id +
+				"," + email +
+				"," + phone +
+				"," + fullName +
+				"," + birthday +
+				"," + imageId;
+	}
 
 }

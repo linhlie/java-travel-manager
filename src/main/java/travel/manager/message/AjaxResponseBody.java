@@ -2,6 +2,7 @@ package travel.manager.message;
 
 import lombok.Data;
 import travel.manager.dto.ImageNewsDto;
+import travel.manager.dto.UserDtoComment;
 import travel.manager.model.admin.User;
 import travel.manager.model.admin.UserDto;
 import travel.manager.model.home.*;
@@ -16,6 +17,7 @@ public class AjaxResponseBody {
     private List list;
     private boolean status;
     private User user;
+    private List<UserDtoComment>listUsers;
     private long userId;
     private UserDto userDto;
     private String jsonUser;
@@ -29,6 +31,8 @@ public class AjaxResponseBody {
     private List<ImageNewsDto>_imagesNews;
     private List<NewsImage>newsImages;
     private Tour tour;
+    private List<Image>imagesUserComments;
+    private List<Comment>comments;
 
 
     public String getMsg() {
@@ -94,4 +98,13 @@ public class AjaxResponseBody {
     public void setImages(List<Image> images) {
         this.images = images;
     }
+
+    public List<UserDtoComment> getListUsers() {
+        return listUsers;
+    }
+
+    public void setListUsers(List<UserDtoComment> listUsers) {
+        this.listUsers = listUsers;
+    }
+
 }
