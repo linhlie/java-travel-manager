@@ -4,14 +4,22 @@
     var htmlComment="";
     var userId;
     var _comments =[];
+    var tourIds=[];
+    var _login;
+    sessionLogin()
     $(function () {
         var id = sessionStorage.getItem("dataId");
-        console.log(id);
+        sessionLogin();
+        loadTourDetails(id);
+        loadListNews();
+        loadCateTours();
+        checkCart();
 
+    });
+    function sessionLogin() {
         var login = sessionStorage.getItem("login");
-        console.log(login);
-
-        if (login  != null){
+        _login =login;
+        if(login!=null){
             var html='<a href="/profile">'+login+'</a>';
             $("#login-form").attr("style", "display: none;");
             $("#sign-up").attr("style", "display: none;");
@@ -19,23 +27,23 @@
             $('#account').removeClass("hidden");
             $('#logout').removeClass("hidden");
             $(".profile").html(html);
-
+            return true;
         }
         else {
             $("#logout").attr("style", "display: none;");
             $("#account").attr("style", "display: none;");
+            return false;
         }
 
-        loadTourDetails(id);
-        loadListNews();
-        loadCateTours();
-        checkCart();
 
-    });
+    }
+    var _tour =[];
     function loadTourDetails(id) {
         function onSuccess(response) {
             if(response && response.status){
                 var tour = response.tour;
+                _tour =tour;
+                var place = response.place;
                 var imagesTours = [];
                 imagesTours = response.imagesTours;
                 var discount = tour.discount*100;
@@ -77,7 +85,7 @@
                     '<img src="images/stats_2.png" alt="">'+
                     '<div class="stats_last_content">'+
                     '<div class="stats_type">Địa điểm</div>'+
-                    '<div class="stats_type">'+tour.placeId+'</div>'+
+                    '<div class="stats_type">'+place.placeName+'</div>'+
                     '</div></div></div></div>' +
                     '<div class="col-lg-2">'+
                     '<div class="stats_last order-md-1 order-3">'+
@@ -112,24 +120,28 @@
                     '<div class="stats_type">$'+tour.price+'</div>'+
                     '</div></div></div></div></div><br>'+
                     '<div class="row">'+
-                    '<div class="col-lg-2">'+
-                    '<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#myModal">Book now</button>'+
+                    '<div class="col-lg-2 book-tour">'+
+                    '<button type="button" class="btn btn-success book"  data-toggle="modal" data-target="#myModal">Book now</button>'+
                     '<div class="modal" id="myModal">'+
                     '<div class="modal-dialog">'+
                     '<div class="modal-content">'+
                     '<div class="modal-header">'+
-                    '<h4 class="modal-title">Modal Heading</h4>'+
+                    '<h4 class="modal-title">'+tour.tourName+'</h4>'+
                     '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
                     '</div>'+
                     '<div class="modal-body">'+
-                    '<ul><li>item 1</li>'+
-                    '<li>item 2</li> <li>item 3</li><li>item 4</li><li>item 5</li></ul></div>'+
+                    '<ul style="text-align: left;color: black"><li style="margin-bottom: 3px;">Tài khoản: '+_login+'</li>'+
+                    '<li style="margin-bottom: 3px;">Chi phí/ Số người: '+tour.price+'/'+ tour.totalMember+'</li>' +
+                    '<li style="margin-bottom: 3px;">Ngày đi: '+tour.departureDate+'</li>' +
+                    '<li style="margin-bottom: 3px;">Thời gian chuyến đi: '+tour.totalDays+'</li>' +
+                    '<li style="margin-bottom: 3px;">Số người đi:<input type="number" class="total-people" id="total-people"/></li></ul></div>'+
                     '<div class="modal-footer">'+
-                    '<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>'+
+                    '<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy bỏ</button>'+
+                    '<button type="button" class="btn btn-success confirm" data-dismiss="modal">Đồng ý</button>'+
                     '</div></div></div> </div>'+
                     '</div>' +
                     '<div class="col-lg-2">'+
-                    '<button type="button" class="btn btn-success">Add Cart</button>'+
+                    '<button type="button" data-id="'+tour.tourId+'" class="add_cart btn btn-success">Add Cart</button>'+
                     '</div>'+
                     '</div>'+
                     '<div class="blog_post_title"><a href="#">Tour Details</a></div>'+
@@ -137,6 +149,17 @@
                     '<p>'+tour.tourName+'</p>'+
                 '</div>'+
                 '<div>'+tour.tourContent+'</div>';
+
+                $(document).on("click",".book", function () {
+                    if (sessionLogin()) {
+                    } else {
+                        alert("Bạn cần phải đăng nhập");
+                        window.location.replace("http://localhost:8888/login");
+
+                    }
+                });
+
+
 
             }
             $(".blog_post").html(html);
@@ -148,6 +171,37 @@
 
         getTourDetails(id, onSuccess, onError);
     }
+    $(document).on("click",".confirm", function () {
+        var string = [];
+        if ($('.total-people').val().trim() != "") {
+            var total = $('.total-people').val().trim();
+            string.push(total);
+        } else {
+            string.push(_tour.totalMember);
+        }
+        string.push(_tour.tourId);
+        string.push(_login);
+        string.toString();
+        oderTour(string);
+    });
+
+    function oderTour(string) {
+        function onSuccess(response) {
+            if (response && response.status) {
+                console.log(response);
+                alert("Đặt tour thành công!");
+            }
+        }
+
+        function onError(error) {
+            alert("Đặt tour thất bạn!");
+            console.log(error);
+        }
+
+        addOrder(string, onSuccess, onError);
+
+    }
+
     function loadListNews() {
 
         function onSuccess(response) {
@@ -162,14 +216,12 @@
                     var str = news[i].createAt;
                     var res = str.split(" ", 1);
                     var html ='<li class="latest_post clearfix">'+
-                        '<div class="latest_post_image">'+
-                        '<a href="#"><img style="height: 73px;width: 73px" src="'+image[j].image_url+'" alt=""></a>'+
+                        '<div class="latest_post_image detail_news" data-id="'+news[i].news_id+'"><a href="news-detail"><img style="height: 73px;width: 73px" src="'+image[j].image_url+'" alt=""></a>'+
                         '</div>'+
                         '<div class="latest_post_content">'+
-                        '<div class="latest_post_title trans_200"><a href="#">'+news[i].name+'</a></div>'+
+                        '<div class="latest_post_title trans_200 detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+news[i].name+'</a></div>'+
                         '<div class="latest_post_meta">'+
-                        '<div class="latest_post_author trans_200"><a href="#">'+news[i].createByl+'</a></div>'+
-                        '<div class="latest_post_date trans_200"><a href="#">'+res+'</a></div>'+
+                        '<div class="latest_post_date trans_200 detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+res+'</a></div>'+
                         '</div> </div> </li> ';
 
                     htmlNews+=html;
@@ -182,9 +234,9 @@
                     var str = news[i].createAt;
                     var res = str.split(" ", 1);
                     var _html = '<div class="footer_blog_item clearfix">'+
-                        '<div class="footer_blog_image"><img src="'+image[h].image_url+'" alt="https://unsplash.com/@avidenov"></div>'+
+                        '<div class="footer_blog_image detail_news" data-id="'+news[i].news_id+'"><a href="news-detail"><img src="'+image[h].image_url+'" alt="https://unsplash.com/@avidenov"></a></div>'+
                         '<div class="footer_blog_content">'+
-                        '<div class="footer_blog_title"><a href="home/news.html">'+news[i].name+'</a></div>'+
+                        '<div class="footer_blog_title detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+news[i].name+'</a></div>'+
                         '<div class="footer_blog_date">'+res+'</div>'+
                         '</div>'+
                         '</div>';
@@ -241,9 +293,9 @@
 
         getListUser(onSuccess, onError);
     }
-    $(document).on("click",".test", function () {
+    $(document).on("click",".detail_news", function () {
         var dataId = $(this).attr("data-id");
-        sessionStorage.setItem("dataId",dataId)
+        sessionStorage.setItem("newsId",dataId)
     });
     var cateHtml="";
 
@@ -272,14 +324,40 @@
     function checkCart() {
         var login = sessionStorage.getItem("login");
         var string = localStorage.getItem(login);
-        var array  = [];
-        array = string.split(",");
+        var array = string.split(",");
+        tourIds=array;
         console.log(array.length)
         if (array.length>0){
             var htmlCart= '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">'+array.length+'</span></span></a>'
         }
-        console.log(htmlCart)
         $(".test_cart").html(htmlCart);
     }
+
+    $(document).on("click",".add_cart", function () {
+        if (sessionLogin()){
+            var dataId = $(this).attr("data-id");
+            if(tourIds.length==0){
+                tourIds.push(dataId);
+                localStorage.setItem(_login,tourIds);
+                checkCart();
+            }
+            else {
+                if (tourIds.indexOf(dataId)==-1){
+                    tourIds.push(dataId);
+                    localStorage.setItem(_login,tourIds);
+                    checkCart();
+                }
+                else {
+                    alert("Bạn đã thêm tour này vào giỏ hàng trước đó!")
+                }
+            }
+
+        }
+        else {
+            alert("Bạn cần phải đăng nhập");
+            window.location.replace("http://localhost:8888/login");
+
+        }
+    });
 
 })(jQuery);

@@ -36,7 +36,6 @@
         if (array.length>0){
         var htmlCart= '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">'+array.length+'</span></span></a>'
         }
-        console.log(htmlCart)
         $(".test_cart").html(htmlCart);
     }
 

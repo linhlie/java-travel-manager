@@ -13,11 +13,11 @@ function _get(url, onSuccess, onError) {
 function _post(url, data, onSuccess, onError) {
     $.ajax({
         type: "POST",
-        contentType: "application/json",
+        // contentType: "application/json",
         url: url,
-        data: JSON.stringify(data),
-        // data:data,
-        dataType: 'json',
+        // data: JSON.stringify(data),
+        data: data,
+        // dataType: 'json',
         cache: false,
         timeout: 600000,
         success: onSuccess,
@@ -102,4 +102,22 @@ function updateUser(data, onSuccess, onError) {
     console.log("test")
     var url ="/user/update";
     _post(url, data, onSuccess, onError);
+}
+function addOrder(data, onSuccess, onError) {
+    var url ="/order/tour/"+data;
+    _get(url, onSuccess, onError);
+}
+
+function getCart(data, onSuccess, onError) {
+    var url ="/tour/cart/"+data;
+    _get(url, onSuccess, onError);
+}
+
+function getOrdersByEmail(email, onSuccess, onError) {
+    var url ="/tour/order/"+email;
+    _get(url, onSuccess, onError);
+}
+function getPaid(string, onSuccess, onError) {
+    var url ="http://localhost:9999/bank/users/"+string;
+    _get(url, onSuccess, onError);
 }
