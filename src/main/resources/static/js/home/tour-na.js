@@ -101,19 +101,29 @@
     $(document).on("click",".add_cart", function () {
         if (sessionLogin()){
             var dataId = $(this).attr("data-id");
-            if (id_check!=dataId){
+            if(tourIds.length==0){
                 tourIds.push(dataId);
-                console.log(tourIds);
-                id_check=dataId;
+                localStorage.setItem(_login,tourIds);
+                checkCart();
             }
             else {
-                alert("Bạn đã thêm tour này vào giỏ hàng trước đó!")
+                if (tourIds.indexOf(dataId)==-1){
+                    tourIds.push(dataId);
+                    localStorage.setItem(_login,tourIds);
+                    checkCart();
+                }
+                else {
+                    alert("Bạn đã thêm tour này vào giỏ hàng trước đó!")
+                }
             }
-            localStorage.setItem(_login,tourIds);
+
+        }
+        else {
+            alert("Bạn cần phải đăng nhập");
+            window.location.replace("http://localhost:8888/login");
 
         }
     });
-
     function loadListNews() {
 
         var htmlNews="";
@@ -158,13 +168,12 @@
     function checkCart() {
         var login = sessionStorage.getItem("login");
         var string = localStorage.getItem(login);
-        var array  = [];
-        array = string.split(",");
+        var array = string.split(",");
+        tourIds=array;
         console.log(array.length)
         if (array.length>0){
             var htmlCart= '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">'+array.length+'</span></span></a>'
         }
-        console.log(htmlCart)
         $(".test_cart").html(htmlCart);
     }
 

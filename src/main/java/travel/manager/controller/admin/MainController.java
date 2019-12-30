@@ -1,7 +1,6 @@
 package travel.manager.controller.admin;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -11,14 +10,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import travel.manager.message.AjaxResponseBody;
 import travel.manager.model.admin.RegisterUser;
-import travel.manager.model.admin.User;
 import travel.manager.repository.admin.UserRepository;
 import travel.manager.service.admin.SecurityServiceImpl;
 import travel.manager.service.admin.UserService;
 
-import javax.validation.Valid;
 import java.security.Principal;
-import java.util.List;
 
 
 @Controller
@@ -32,18 +28,14 @@ public class MainController {
 
 	@Autowired
 	private SecurityServiceImpl securityService;
-	
-	@GetMapping(value = {"/admin","/admin/"})
-	public String admin() {
-		return "admin";
-	}
+
 
 	@GetMapping("/admin/users")
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	public String getUsers() {
-		return "/users";
+		return "admin/User";
 	}
-	
+
 	@GetMapping("/403")
 	public String accessDenied() {
 		return "403";

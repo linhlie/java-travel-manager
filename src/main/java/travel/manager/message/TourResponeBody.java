@@ -19,4 +19,5 @@ public class TourResponeBody {
     private List<Image>imagesNews;
     private News news;
     private Image image;
+    private List<Tour>toursCart;
 }

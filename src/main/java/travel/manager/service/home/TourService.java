@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import travel.manager.model.home.Tour;
 import travel.manager.repository.home.TourRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,5 +31,15 @@ public class TourService {
 
     public List<Tour> getTourByPlace(int id) {
         return tourRepository.findTourByIdPlace(id);
+    }
+
+    public List<Tour> getListTours(String string) {
+        String[] arrTour = string.split(",");
+        List<Tour>tours = new ArrayList<>();
+        for (int i = 0; i < arrTour.length; i++) {
+            Tour tour = tourRepository.findTourById(Long.parseLong(arrTour[i]));
+            tours.add(tour);
+        }
+        return tours;
     }
 }

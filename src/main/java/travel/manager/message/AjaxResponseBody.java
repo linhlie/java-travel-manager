@@ -33,6 +33,8 @@ public class AjaxResponseBody {
     private Tour tour;
     private List<Image>imagesUserComments;
     private List<Comment>comments;
+    private Order order;
+    private List<Order>orders;
 
 
     public String getMsg() {

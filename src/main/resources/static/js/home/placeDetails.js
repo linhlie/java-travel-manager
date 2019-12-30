@@ -138,15 +138,26 @@
     $(document).on("click",".add_cart", function () {
         if (sessionLogin()){
             var dataId = $(this).attr("data-id");
-            if (id_check!=dataId){
+            if(tourIds.length==0){
                 tourIds.push(dataId);
-                console.log(tourIds);
-                id_check=dataId;
+                localStorage.setItem(_login,tourIds);
+                checkCart();
             }
             else {
-                alert("Bạn đã thêm tour này vào giỏ hàng trước đó!")
+                if (tourIds.indexOf(dataId)==-1){
+                    tourIds.push(dataId);
+                    localStorage.setItem(_login,tourIds);
+                    checkCart();
+                }
+                else {
+                    alert("Bạn đã thêm tour này vào giỏ hàng trước đó!")
+                }
             }
-            localStorage.setItem(_login,tourIds);
+
+        }
+        else {
+            alert("Bạn cần phải đăng nhập");
+            window.location.replace("http://localhost:8888/login");
 
         }
     });
@@ -169,9 +180,8 @@
                         '<a href="#"><img style="height: 73px;width: 73px" src="'+image[j].image_url+'" alt=""></a>'+
                         '</div>'+
                         '<div class="latest_post_content">'+
-                        '<div class="latest_post_title trans_200"><a href="#">'+news[i].name+'</a></div>'+
+                        '<div class="latest_post_title trans_200 detail_news" data-id="'+news[i].news_id+'">'+news[i].name+'</a></div>'+
                         '<div class="latest_post_meta">'+
-                        '<div class="latest_post_author trans_200"><a href="#">'+news[i].createByl+'</a></div>'+
                         '<div class="latest_post_date trans_200"><a href="#">'+res+'</a></div>'+
                         '</div> </div> </li> ';
 
@@ -274,13 +284,12 @@
     function checkCart() {
         var login = sessionStorage.getItem("login");
         var string = localStorage.getItem(login);
-        var array  = [];
-        array = string.split(",");
+        var array = string.split(",");
+        tourIds=array;
         console.log(array.length)
         if (array.length>0){
             var htmlCart= '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">'+array.length+'</span></span></a>'
         }
-        console.log(htmlCart)
         $(".test_cart").html(htmlCart);
     }
 

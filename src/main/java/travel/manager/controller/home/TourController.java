@@ -107,6 +107,9 @@ public class TourController {
             Tour tour = tourService.findOne(id);
             result.setTour(tour);
 
+            Place place = placeService.getPlaceById(tour.getPlaceId());
+            result.setPlace(place);
+
             List<Comment>comments = commentService.getComments(Integer.parseInt(String.valueOf(id)));
             result.setComments(comments);
 
@@ -139,6 +142,22 @@ public class TourController {
             Image image = imageService.getImage(id);
             result.setImage(image);
 
+            result.setMsg("Image");
+            result.setStatus(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setStatus(false);
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = { "/tour/cart/{string}" }, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getDataCart(@PathVariable("string") String string) {
+        TourResponeBody result = new TourResponeBody();
+        try {
+            List<Tour> tours = tourService.getListTours(string);
+            result.setToursCart(tours);
             result.setMsg("Image");
             result.setStatus(true);
         } catch (Exception e) {
