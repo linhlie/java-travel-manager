@@ -1,0 +1,29 @@
+.secondary{
+    color: #fff;
+    display: flex;
+    position: absolute;
+    border-radius: 50%;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    flex-wrap: wrap;
+    transition: .3s cubic-bezier(.25,.8,.5,1);
+    height: 15px;
+    width: 15px;
+    font-size: 10px;
+    background-color: #d10a00 !important;
+    border-color: #d10a00 !important;
+    top: -13px;
+    right: -8px;
+    box-sizing: inherit;
+    background-repeat: no-repeat;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    line-height: 1.25;
+    font-family: Roboto,sans-serif;
+}
