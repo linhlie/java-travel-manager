@@ -60,6 +60,38 @@
 	-webkit-text-shadow: rgba(0,0,0,.01) 0 0 1px;
 	text-shadow: rgba(0,0,0,.01) 0 0 1px;
 }
+._2tqoY{
+	border: 0;
+	font-size: 100%;
+	font-weight: inherit;
+	vertical-align: baseline;
+	width: 960px;
+	margin: 0 auto!important;
+	background: #fff;
+	padding: 32px 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+.Vrv9u{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-weight: inherit;
+	vertical-align: baseline;
+	padding-left: 12px;
+	padding-right: 12px;
+	margin-left: 8.33333%;
+	width: 25%;
+}
+.kffpt{
+	padding-left: 12px;
+	padding-right: 12px;
+	width: 58.33333%;
+	font-size: 100%;
+	font-weight: inherit;
+	vertical-align: baseline;
+}
 body
 {
 	font-family: 'Open Sans', sans-serif;

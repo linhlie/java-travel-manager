@@ -176,13 +176,12 @@
                     var str = news[i].createAt;
                     var res = str.split(" ", 1);
                     var html ='<li class="latest_post clearfix">'+
-                        '<div class="latest_post_image">'+
-                        '<a href="#"><img style="height: 73px;width: 73px" src="'+image[j].image_url+'" alt=""></a>'+
+                        '<div class="latest_post_image detail_news" data-id="'+news[i].news_id+'"><a href="news-detail"><img style="height: 73px;width: 73px" src="'+image[j].image_url+'" alt=""></a>'+
                         '</div>'+
                         '<div class="latest_post_content">'+
-                        '<div class="latest_post_title trans_200 detail_news" data-id="'+news[i].news_id+'">'+news[i].name+'</a></div>'+
+                        '<div class="latest_post_title trans_200 detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+news[i].name+'</a></div>'+
                         '<div class="latest_post_meta">'+
-                        '<div class="latest_post_date trans_200"><a href="#">'+res+'</a></div>'+
+                        '<div class="latest_post_date trans_200 detail_news" data-id="'+news[i].news_id+'"><a href="news-detail">'+res+'</a></div>'+
                         '</div> </div> </li> ';
 
                     htmlNews+=html;

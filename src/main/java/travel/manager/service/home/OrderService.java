@@ -44,4 +44,14 @@ public class OrderService {
         List<Order> orders = orderRepository.findByUserId(id);
         return orders;
     }
+
+    public boolean deletedOrder(int id) {
+        if (orderRepository.findById(id)!=null){
+            orderRepository.deleteById(id);
+            return true;
+        }
+        else
+            return false;
+
+    }
 }

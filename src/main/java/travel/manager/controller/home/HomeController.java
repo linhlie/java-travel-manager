@@ -71,6 +71,15 @@ public class HomeController {
         return "home/newsdetails";
     }
 
+    @GetMapping("/checkouts")
+    public String viewCheckouts() {
+        return "home/checkouts";
+    }
+    @GetMapping("/checkouts/history")
+    public String viewHistoryCheckouts() {
+        return "home/historyOrders";
+    }
+
     @GetMapping("/profile")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ADMIN')")
     public String viewNewsProfile(Model model) {

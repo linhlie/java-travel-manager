@@ -2,6 +2,7 @@
     var _login;
     var array  = [];
     var cate=[];
+    var _htmlOrder="";
     $(function () {
         sessionLogin();
         checkCart();
@@ -53,8 +54,11 @@
                 console.log(response)
                 var toursCart =[];
                 toursCart =response.toursCart;
+                var money=0;
                 for (var i=0;i<toursCart.length;i++) {
                     var discount = toursCart[i].discount*100;
+                    var pay = toursCart[i].price - toursCart[i].price*toursCart[i].discount;
+                    money+=pay;
                     var html = '<tr>' +
                         '<th scope="row" class="border-0">' +
                         '<div class="p-2">' +
@@ -65,8 +69,8 @@
                         '<td class="border-0 align-middle"><strong>' + toursCart[i].price + '$</strong></td>' +
                         '<td class="border-0 align-middle"><strong>' + discount + '%</strong></td>' +
                         '<td class="border-0 align-middle"><strong>' + toursCart[i].departureDate + '</strong></td>' +
-                        '<td class="border-0 align-middle"><strong>' + toursCart[i].totalDays + '</strong></td>' +
-                        '<td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>' +
+                        '<td class="border-0 align-middle"><strong>$' + pay + '</strong></td>' +
+                        '<td class="border-0 align-middle"><a href="#" class="text-dark"><i data-id ="'+toursCart[i].tourId+'" class="fa fa-trash delete-trash"></i></a></td>' +
                         '</tr>';
                     _htmlCart += html;
 
@@ -80,8 +84,20 @@
                     '</div> </div></th>' +
                     '<td class="border-0 align-middle"><strong></strong></td>' +
                     '<td class="border-0 align-middle"><strong></strong></td>' +
+                    '<td class="border-0 align-middle"><strong>Tổng tiền</strong></td>' +
+                    '<td class="border-0 align-middle"><strong>$'+money+'</strong></td>' +
+                    '</tr>'+
+                    '<tr>' +
+                    '<th scope="row" class="border-0">' +
+                    '<div class="p-2">' +
+                    '<img src="" alt="" width="70" class="img-fluid rounded shadow-sm" style="height: 40px;width: 40px;">' +
+                    '<div class="ml-3 d-inline-block align-middle">' +
+                    '<h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"></a></h5>' +
+                    '</div> </div></th>' +
                     '<td class="border-0 align-middle"><strong></strong></td>' +
-                    '<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Đặt ngay</button></td>'+
+                    '<td class="border-0 align-middle"><strong></strong></td>' +
+                    '<td class="border-0 align-middle"><strong></strong></td>' +
+                    '<td><button type="button" class="btn btn-success paid">Thanh Toán</button></td>'+
                     '<td><button type="button" class="btn btn-success removeAll" data-toggle="modal" data-target="#myModal">Xóa hết</button></td>'+
                     '</tr>';
                 _htmlCart+=_html;
@@ -100,38 +116,24 @@
         var html="";
         $(".table-cart").html(html);
     });
-    $(document).on("click",".paid", function () {
-
-        var String = "15101998,123456,12578";
-        loadPaid(String)
-        function loadPaid() {
-            // function onSuccess(res) {
-            //     if (res&&res.status){
-            //         alert("OK")
-            //     }
-            // }
-            // function onError(error) {
-            //     console.log(error)
-            // }
-            $.ajax({
-                type: "GET",
-                contentType: "application/json",
-                url: "http://localhost:9999/bank/users/"+String,
-                crossDomain : true,
-                cache: false,
-                timeout: 600000,
-                success : function(data) {
-                    alert("OK")
-                },
-                error : function(e) {
-                    alert(e);
-                }
-            });
-
-        }
+    $(document).on("click",".delete-trash", function () {
+        var dataId = $(this).attr("data-id");
+        var string = localStorage.getItem(_login);
+        var data=[];
+        data = string.split(",");
+        data = jQuery.grep(data, function(value) {
+            return value != dataId;
+        });
+        localStorage.setItem(_login,data);
+        location.reload();
     });
+    $(document).on("click",".paid", function () {
+        var string = localStorage.getItem(_login);
+        localStorage.setItem("orders",string);
+        window.location.replace("http://localhost:8888/checkouts")
+    });
+
     function loadDataOrder() {
-        var _htmlOrder="";
         var orders =[];
         function onSuccess(response) {
             if (response&&response.status){
@@ -140,40 +142,10 @@
                 if (orders.length>0){
                     for (var i =0;i<orders.length;i++){
                         var id = orders[i].tourId;
-                        loadTour(id);
-                        function loadTour(id) {
-                            function onSuccess(res) {
-                                if (res&&res.status){
-                                    var tour = res.tour;
-                                    var  discount = tour.discount*100;
-                                    var html1= '<tr>' +
-                                        '<th scope="row" class="border-0">' +
-                                        '<div class="p-2">' +
-                                        '<img src="images/icon/airplane.png" alt="" width="70" class="img-fluid rounded shadow-sm" style="height: 40px;width: 40px;">' +
-                                        '<div class="ml-3 d-inline-block align-middle">' +
-                                        '<h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">' + tour.tourName + '</a></h5>' +
-                                        '</div> </div></th>' +
-                                        '<td class="border-0 align-middle"><strong>' + tour.price + '$</strong></td>' +
-                                        '<td class="border-0 align-middle"><strong>' + discount + '%</strong></td>' +
-                                        '<td class="border-0 align-middle"><strong>' + tour.departureDate + '</strong></td>' +
-                                        '<td class="border-0 align-middle"><strong>' + tour.totalDays + '</strong></td>' +
-                                        '<td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>' +
-                                        '</tr>';
-                                }
-                                _htmlOrder+=html1;
-                                $(".table-cart-order").html(_htmlOrder);
-                            }
-                            function onError(error) {
-
-                            }
-                            getTourDetails(id, onSuccess, onError)
-
-                        }
+                        var del;
+                        del = orders[i].ordersId;
+                        loadTour(id,del);
                     }
-
-                    var html2= '<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" style="margin-right: 60px;">Đặt ngay</button>'+
-                        '<button type="button" class="btn btn-success removeAll" data-toggle="modal" data-target="#myModal">Xóa hết</button>';
-                    // $(".table-cart-footer").html(html2);
 
                 }
 
@@ -184,6 +156,38 @@
             console.log(error);
         }
         getOrdersByEmail(_login,onSuccess,onError);
+
+    }
+    function loadTour(id,del) {
+        var html1 ="";
+        function onSuccess(res) {
+            if (res&&res.status){
+                var tour = res.tour;
+                var  discount = tour.discount*100;
+                html1= '<tr>' +
+                    '<th scope="row" class="border-0">' +
+                    '<div class="p-2">' +
+                    '<img src="images/icon/airplane.png" alt="" width="70" class="img-fluid rounded shadow-sm" style="height: 40px;width: 40px;">' +
+                    '<div class="ml-3 d-inline-block align-middle">' +
+                    '<h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">' + tour.tourName + '</a></h5>' +
+                    '</div> </div></th>' +
+                    '<td class="border-0 align-middle"><strong>' + tour.price + '$</strong></td>' +
+                    '<td class="border-0 align-middle"><strong>' + discount + '%</strong></td>' +
+                    '<td class="border-0 align-middle"><strong>' + tour.departureDate + '</strong></td>' +
+                    '<td class="border-0 align-middle"><strong>' + tour.totalDays + '</strong></td>' +
+                    '<td class="border-0 align-middle"><a href="" class="text-dark"><i data-id ="'+del+'" class="fa fa-trash delete-order"></i></a></td>' +
+                    '<td class="border-0 align-middle"><input type="checkbox" name="vehicle1" value="Bike"></td>' +
+                    '</tr>';
+                _htmlOrder+=html1;
+                $(".table-cart-order").html(_htmlOrder);
+
+            }
+
+        }
+        function onError(error) {
+
+        }
+        getTourDetails(id, onSuccess, onError)
 
     }
 

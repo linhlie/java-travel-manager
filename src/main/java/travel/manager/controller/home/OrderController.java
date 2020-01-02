@@ -48,4 +48,23 @@ public class OrderController {
         }
         return ResponseEntity.ok(result);
     }
+    @RequestMapping(value = "/order/deleted/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> getOrders(@PathVariable("id") int id) {
+        AjaxResponseBody result = new AjaxResponseBody();
+        try {
+            if (orderService.deletedOrder(id)){
+                result.setMsg("Deleted Success!");
+                result.setStatus(true);
+            }
+            else {
+                result.setStatus(false);
+            }
+
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setStatus(false);
+        }
+        return ResponseEntity.ok(result);
+    }
 }

@@ -79,7 +79,7 @@
                 var j =1;
                 places = response.places;
                 imagesPl =response.imagesPlaces;
-                for (var i =0;i<places.length;i++){
+                for (var i =0;i<4;i++){
                     var htmlPl = '<div class="col-lg-6 offers_col">'+
                         '<div class="offers_item">'+
                         '<div class="row">'+
