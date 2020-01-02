@@ -17,7 +17,7 @@ public class TourService {
         return tourRepository.findAlls();
     }
 
-    public Tour findOne(long id) {
+    public Tour findOne(Long id) {
         return tourRepository.findTourById(id);
     }
 

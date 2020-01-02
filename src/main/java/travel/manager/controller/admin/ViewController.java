@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import travel.manager.model.home.CategoryTours;
 import travel.manager.model.home.Place;
@@ -78,10 +75,17 @@ public class ViewController {
         tourService.delete(id);
         return "redirect:/admin/tour";
     }
-    @GetMapping("admin/tour/{id}/edit")
-    public String edit(@PathVariable Long id, Model model){
+
+    @GetMapping("/admin/tour/{id}/edit")
+    public String updateTour(Model model,@PathVariable Long id) {
         model.addAttribute("tour",tourService.findOne(id));
+        model.addAttribute("categoryTour",categoryTourService.getCateTours());
+        model.addAttribute("place",placeService.getAll());
         return "admin/AddTour";
+    }
+    @GetMapping("/admin/updateTour")
+    public String edit(Model model){
+        return "admin/EditTour";
     }
     @GetMapping("/admin/addUser")
     public String getAddUser() {
@@ -104,13 +108,7 @@ public class ViewController {
         return "admin/EditNews";
     }
 
-//    @GetMapping("/admin/editTour")
-//    public String editTour(Model model) {
-//        model.addAttribute("tour",new Tour());
-//        model.addAttribute("categoryTour",categoryTourService.getCateTours());
-//        model.addAttribute("place",placeService.getAll());
-//        return "admin/AddTour";
-//    }
+
 
     @GetMapping("/admin/editCate")
     public String editCate() {

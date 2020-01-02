@@ -15,7 +15,7 @@ public interface TourRepository extends JpaRepository<Tour,Long> {
     List<Tour> findAlls();
 
     @Query(value = "select * from tour_manager.tour where tour_id = ?", nativeQuery = true)
-    Tour findTourById(long id);
+    Tour findTourById(Long id);
 
     @Query(value = "SELECT * FROM tour_manager.tour where country =1", nativeQuery = true)
     List<Tour> findAllToursVN();

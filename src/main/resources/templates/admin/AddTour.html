@@ -8,6 +8,7 @@
 
     <meta name="description" content="overview &amp; stats"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+    <base href="/">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
 
@@ -237,6 +238,7 @@
 
             <br>
             <form class="form-horizontal" role="form" action="#" th:action="@{/admin/saveTour}" th:object="${tour}" method="post" novalidate="novalidate">
+
                 <div class="form-group">
                     <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tên Tour </label>
 
@@ -321,6 +323,7 @@
                         </button>
                     </div>
                 </div>
+                <input type="hidden" th:field="*{tourId}">
             </form>
         </div>
 
