@@ -14,7 +14,7 @@ public class Tour {
     private Long tourId;
 
     @Column(name = "category_tour_id")
-    private int categoryTourId;
+    private Long categoryTourId;
 
     @Column(name = "place_id")
     private int placeId;
@@ -37,5 +37,6 @@ public class Tour {
     private float discount;
 
     private int totalDays;
-
+    @Column(name = "image_id")
+    private int imagesId;
 }

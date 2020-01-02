@@ -42,4 +42,11 @@ public class TourService {
         }
         return tours;
     }
+
+    public void save(Tour tour) {
+        tourRepository.save(tour);
+    }
+    public void delete(Long id){
+        tourRepository.deleteById(id);
+    }
 }

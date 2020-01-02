@@ -1,11 +1,35 @@
 package travel.manager.controller.admin;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import travel.manager.model.home.CategoryTours;
+import travel.manager.model.home.Place;
+import travel.manager.model.home.Tour;
+import travel.manager.service.home.CategoryTourService;
+import travel.manager.service.home.ImageService;
+import travel.manager.service.home.PlaceService;
+import travel.manager.service.home.TourService;
+
+import javax.validation.Valid;
 
 @Controller
 public class ViewController {
 
+    @Autowired
+    TourService tourService;
+    @Autowired
+    CategoryTourService categoryTourService;
+    @Autowired
+    PlaceService placeService;
+    @Autowired
+    ImageService imageService;
     @GetMapping(value = {"/admin","/admin/"})
     public String getAdmin() {
         return "admin/admin";
@@ -27,12 +51,37 @@ public class ViewController {
         return "admin/AddNews";
     }
     @GetMapping("/admin/addTour")
-    public String getAddTour() {
+    public String getAddTour(Model model) {
+        model.addAttribute("tour",new Tour());
+        model.addAttribute("categoryTour",categoryTourService.getCateTours());
+        model.addAttribute("place",placeService.getAll());
         return "admin/AddTour";
     }
+
+    @PostMapping("/admin/saveTour")
+    public String saveTour(@Valid Tour tour, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            return "admin/AddTour";
+        }
+        tourService.save(tour);
+        return "redirect:/admin/tour";
+    }
+
     @GetMapping("/admin/tour")
-    public String getTour() {
+    public String getTour(Model model) {
+        model.addAttribute("tour",tourService.getAll());
+//        model.addAttribute("image",imageService.)
         return "admin/Tour";
+    }
+    @GetMapping("/tour/{id}/delete")
+    public String delete(@PathVariable Long id, RedirectAttributes redirect) {
+        tourService.delete(id);
+        return "redirect:/admin/tour";
+    }
+    @GetMapping("admin/tour/{id}/edit")
+    public String edit(@PathVariable Long id, Model model){
+        model.addAttribute("tour",tourService.findOne(id));
+        return "admin/AddTour";
     }
     @GetMapping("/admin/addUser")
     public String getAddUser() {
@@ -54,10 +103,15 @@ public class ViewController {
     public String editNews() {
         return "admin/EditNews";
     }
-    @GetMapping("/admin/editTour")
-    public String editTour() {
-        return "admin/EditTour";
-    }
+
+//    @GetMapping("/admin/editTour")
+//    public String editTour(Model model) {
+//        model.addAttribute("tour",new Tour());
+//        model.addAttribute("categoryTour",categoryTourService.getCateTours());
+//        model.addAttribute("place",placeService.getAll());
+//        return "admin/AddTour";
+//    }
+
     @GetMapping("/admin/editCate")
     public String editCate() {
         return "admin/EditCategory";

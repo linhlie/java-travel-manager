@@ -282,41 +282,39 @@
 												</th>
 												<th>ID</th>
 												<th>Tên Tour du lịch</th>
+<!--												<th>Hình ảnh</th>-->
 												<th class="hidden-480">Giá gốc</th>
 												<th>Giảm giá</th>
 												<th>Ngày khởi hành</th>
 												<th>Số lượng khách</th>
-												<th>Số lượng đã đăng ký</th>
-												<th>Loại Tour</th>
+
 												<th>Action</th>
 											</tr>
 											</thead>
 											<tbody>
-											<tr>
+											<tr th:each ="tourr : ${tour}">
 												<td class="center">
 													<label class="pos-rel">
 														<input type="checkbox" class="ace" />
 														<span class="lbl"></span>
 													</label>
 												</td>
-												<td>id</td>
-												<td>Title</td>
-												<td>$1500</td>
-												<td>10%</td>
-												<td class="hidden-480">Feb 12</td>
-												<td>50</td>
-												<td>20</td>
-												<td>Tuor trong nước</td>
 
+												<td th:text="${tourr.getTourId()}"></td>
+												<td th:text="${tourr.tourName}"></td>
+												<td th:text="${tourr.price}"></td>
+												<td th:text="${tourr.discount}"></td>
+												<td th:text="${tourr.departureDate}"></td>
+												<td th:text="${tourr.totalMember}"></td>
 												<td>
 													<div class="hidden-sm hidden-xs action-buttons">
 
 
-														<a class="green" href="EditTour.html">
+														<a class="green" th:href="@{/tour/{id}/edit(id=${tourr.tourId})}">
 															<i class="ace-icon fa fa-pencil bigger-130"></i>
 														</a>
 
-														<a class="red" href="#" onclick="return confirm('Delete this news?')">
+														<a class="red" th:href="@{/tour/{id}/delete(id=${tourr.tourId})}" onclick="return confirm('Delete this news?')">
 															<i class="ace-icon fa fa-trash-o bigger-130"></i>
 														</a>
 													</div>

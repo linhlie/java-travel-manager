@@ -14,4 +14,5 @@ public class CategoryTourService {
     public List<CategoryTours> getCateTours() {
         return categoryTourRepository.findAll();
     }
+
 }

@@ -9,7 +9,7 @@ import travel.manager.model.home.Tour;
 import java.util.List;
 
 @Repository
-public interface TourRepository extends JpaRepository<Tour,Integer> {
+public interface TourRepository extends JpaRepository<Tour,Long> {
 
     @Query(value = "select * from tour_manager.tour", nativeQuery = true)
     List<Tour> findAlls();

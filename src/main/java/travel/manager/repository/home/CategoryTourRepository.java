@@ -5,6 +5,5 @@ import org.springframework.stereotype.Repository;
 import travel.manager.model.home.CategoryTours;
 
 @Repository
-public interface CategoryTourRepository extends JpaRepository<CategoryTours,Integer> {
-
+public interface CategoryTourRepository extends JpaRepository<CategoryTours,Long> {
 }

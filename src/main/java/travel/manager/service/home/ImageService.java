@@ -19,7 +19,8 @@ public class ImageService {
     }
     public List<Image> getToursImages(){
         return imageRepository.findByTourId();
-    }public List<Image> getToursImagesVN(){
+    }
+    public List<Image> getToursImagesVN(){
         return imageRepository.findImageToursVN();
     }
     public List<Image> getPlaceImages(){
