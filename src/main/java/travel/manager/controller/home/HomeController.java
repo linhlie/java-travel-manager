@@ -86,5 +86,8 @@ public class HomeController {
         model.addAttribute("userRequest", new UserRequest());
         return "home/profile";
     }
-
+    @GetMapping("/checkout")
+    public String checkout(){
+        return "home/checkout";
+    }
 }

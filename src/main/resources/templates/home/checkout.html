@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travelix Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="plugins/bootstrap4/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <style>
+    body {
+  background: #eecda3;
+  background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+  background: linear-gradient(to right, #fa9e1b, #8d4fff);
+  min-height: 100vh;
+}
+    </style>
+</head>
+<body>
+        <header class="header">
+
+                <!-- Top Bar -->
+        
+                <div class="top_bar">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col d-flex flex-row">
+                                <div class="phone">+45 345 3324 56789</div>
+                                <div class="social">
+                                    <ul class="social_list">
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-behance" aria-hidden="true"></i></a></li>
+                                        <li class="social_list_item"><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="user_box ml-auto">
+                                    <div class="user_box_login user_box_link"><a href="#">login</a></div>
+                                    <div class="user_box_register user_box_link"><a href="#">register</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>		
+                </div>
+        
+                <!-- Main Navigation -->
+        
+                <nav class="main_nav">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col main_nav_col d-flex flex-row align-items-center justify-content-start">
+                        <div class="logo_container">
+                          <div class="logo"><a href="index.html"><img src="images/logo.png" alt="">travelix</a></div>
+                        </div>
+                        <div class="main_nav_container ml-auto">
+                          <ul class="main_nav_list">
+                            <li class="main_nav_item"><a href="index.html">Trang chủ</a></li>
+                            <!-- <li class="main_nav_item"><a href="about.html">about us</a></li> -->
+                            <!-- <li class="main_nav_item dropdown"><a href="#">Tour du lịch</a>
+                            
+                            </li> -->
+                            <li class="main_nav_item dropdown">
+                                <a href="tour.html" id="navbardrop" data-toggle="dropdown">
+                                  <a href="tour.html">Tour du lịch</a>
+                                </a>
+                                <div class="dropdown-menu">
+                                  <a class="dropdown-item" href="TourVN.html" style="color: black;">Du lịch trong nước</a>
+                                  <a class="dropdown-item" href="TourInternational.html" style="color: black;">Du lịch quốc tế</a>
+                                </div>
+                                </li>
+                                <li class="main_nav_item"><a href="place.html">Địa điểm</a></li>
+                                <li class="main_nav_item dropdown">
+                                  <a href="news.html" id="navbardrop" data-toggle="dropdown">
+                                   <a href="news.html">Tin tức</a>
+                                  </a>
+                                  <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="news.html" style="color: black;">Tin mới</a>
+                                    <a class="dropdown-item" href="#" style="color: black;">Cẩm nang du lịch</a>
+                                  </div>
+                                  </li>
+                            <li class="main_nav_item"><a href="contact.html">Liên hệ</a></li>
+                            <li class="main_nav_item"><a href="cart.html">Giỏ hàng</a></li>
+                          </ul>
+                        </div>
+            
+                        <form id="search_form" class="search_form bez_1">
+                          <input type="search" class="search_content_input bez_1">
+                        </form>
+            
+                        <div class="hamburger">
+                          <i class="fa fa-bars trans_200"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>	
+                </nav>
+        
+            </header>
+    <div class="px-4 px-lg-0">
+        <!-- For demo purpose -->
+        <div class="container text-white py-5 text-center">
+                <div>
+                    <p></p>
+                    <p></p>
+                </div>
+             
+            </div>
+        <div class="container text-white py-5 text-center">
+            <div>
+                <p></p>
+                <p></p>
+            </div>
+          
+        </div>
+        <!-- End -->
+      
+        <div class="pb-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 p-5 bg-white rounded shadow-sm mb-5">
+      
+                <!-- Shopping cart table -->
+                <form class="needs-validation" novalidate="">
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                          Valid first name is required.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                        <div class="invalid-feedback">
+                          Valid last name is required.
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="mb-3">
+                      <label for="username">Username</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="username" placeholder="Username" required="">
+                        <div class="invalid-feedback" style="width: 100%;">
+                          Your username is required.
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="mb-3">
+                      <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                      <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                      <div class="invalid-feedback">
+                        Please enter a valid email address for shipping updates.
+                      </div>
+                    </div>
+        
+                    <div class="mb-3">
+                      <label for="address">Address</label>
+                      <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                      <div class="invalid-feedback">
+                        Please enter your shipping address.
+                      </div>
+                    </div>
+        
+                    <div class="mb-3">
+                      <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
+                      <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                    </div>
+        
+                    <div class="row">
+                      <div class="col-md-5 mb-3">
+                        <label for="country">Country</label>
+                        <select class="custom-select d-block w-100" id="country" required="">
+                          <option value="">Choose...</option>
+                          <option>United States</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid country.
+                        </div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="state">State</label>
+                        <select class="custom-select d-block w-100" id="state" required="">
+                          <option value="">Choose...</option>
+                          <option>California</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please provide a valid state.
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="zip">Zip</label>
+                        <input type="text" class="form-control" id="zip" placeholder="" required="">
+                        <div class="invalid-feedback">
+                          Zip code required.
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="mb-4">
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="same-address">
+                      <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                    </div>
+                    <div class="custom-control custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="save-info">
+                      <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                    </div>
+                    <hr class="mb-4">
+        
+                    <h4 class="mb-3">Payment</h4>
+        
+                    <div class="d-block my-3">
+                      <div class="custom-control custom-radio">
+                        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
+                        <label class="custom-control-label" for="credit">Credit card</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="debit">Debit card</label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
+                        <label class="custom-control-label" for="paypal">Paypal</label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <label for="cc-name">Name on card</label>
+                        <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+                        <small class="text-muted">Full name as displayed on card</small>
+                        <div class="invalid-feedback">
+                          Name on card is required
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="cc-number">Credit card number</label>
+                        <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+                        <div class="invalid-feedback">
+                          Credit card number is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">Expiration</label>
+                        <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
+                        <div class="invalid-feedback">
+                          Expiration date required
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="cc-expiration">CVV</label>
+                        <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
+                        <div class="invalid-feedback">
+                          Security code required
+                        </div>
+                      </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                  </form>
+                <!-- End -->
+              </div>
+              <div class="col-lg-6 p-5 bg-white rounded shadow-sm mb-5">
+      
+                <!-- Shopping cart table -->
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="p-2 px-3 text-uppercase">Product</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Price</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Quantity</div>
+                        </th>
+                        <th scope="col" class="border-0 bg-light">
+                          <div class="py-2 text-uppercase">Remove</div>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="border-0">
+                          <div class="p-2">
+                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-1_zrifhn.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="ml-3 d-inline-block align-middle">
+                              <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Timex Unisex Originals</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: Watches</span>
+                            </div>
+                          </div>
+                        </th>
+                        <td class="border-0 align-middle"><strong>$79.00</strong></td>
+                        <td class="border-0 align-middle"><strong>3</strong></td>
+                        <td class="border-0 align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <div class="p-2">
+                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-3_cexmhn.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="ml-3 d-inline-block align-middle">
+                              <h5 class="mb-0"><a href="#" class="text-dark d-inline-block">Lumix camera lense</a></h5><span class="text-muted font-weight-normal font-italic">Category: Electronics</span>
+                            </div>
+                          </div>
+                        </th>
+                        <td class="align-middle"><strong>$79.00</strong></td>
+                        <td class="align-middle"><strong>3</strong></td>
+                        <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <div class="p-2">
+                            <img src="https://res.cloudinary.com/mhmd/image/upload/v1556670479/product-2_qxjis2.jpg" alt="" width="70" class="img-fluid rounded shadow-sm">
+                            <div class="ml-3 d-inline-block align-middle">
+                              <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block">Gray Nike running shoe</a></h5><span class="text-muted font-weight-normal font-italic">Category: Fashion</span>
+                            </div>
+                          </div>
+                          <td class="align-middle"><strong>$79.00</strong></td>
+                          <td class="align-middle"><strong>3</strong></td>
+                          <td class="align-middle"><a href="#" class="text-dark"><i class="fa fa-trash"></i></a>
+                          </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- End -->
+              </div>
+            </div>
+      
+    
+      
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+    
+            <!-- Footer Column -->
+            <div class="col-lg-6 footer_column">
+              <div class="footer_col">
+                <div class="footer_content footer_about">
+                  <div class="logo_container footer_logo">
+                    <div class="logo"><a href="#"><img src="images/logo.png" alt="">travelix</a></div>
+                  </div>
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.3118339648245!2d105.79362951527699!3d20.98013358602478!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc508f938fd%3A0x883e474806a2d1f2!2zSOG7jWMgdmnhu4duIEvhu7kgdGh14bqtdCBN4bqtdCBtw6M!5e0!3m2!1svi!2s!4v1569922192087!5m2!1svi!2s" width="500" height="274" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                  <!-- <p class="footer_about_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vu lputate eros, iaculis consequat nisl. Nunc et suscipit urna. Integer eleme ntum orci eu vehicula pretium.</p> -->
+                
+                </div>
+              </div>
+            </div>
+    
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+              <div class="footer_col">
+                <div class="footer_title">blog posts</div>
+                <div class="footer_content footer_blog">
+                  
+                  <!-- Footer blog item -->
+                  <div class="footer_blog_item clearfix">
+                    <div class="footer_blog_image"><img src="images/footer_blog_1.jpg" alt="https://unsplash.com/@avidenov"></div>
+                    <div class="footer_blog_content">
+                      <div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+                      <div class="footer_blog_date">Nov 29, 2017</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Footer blog item -->
+                  <div class="footer_blog_item clearfix">
+                    <div class="footer_blog_image"><img src="images/footer_blog_2.jpg" alt="https://unsplash.com/@deannaritchie"></div>
+                    <div class="footer_blog_content">
+                      <div class="footer_blog_title"><a href="blog.html">New destinations for you</a></div>
+                      <div class="footer_blog_date">Nov 29, 2017</div>
+                    </div>
+                  </div>
+    
+                  <!-- Footer blog item -->
+                  <div class="footer_blog_item clearfix">
+                    <div class="footer_blog_image"><img src="images/footer_blog_3.jpg" alt="https://unsplash.com/@bergeryap87"></div>
+                    <div class="footer_blog_content">
+                      <div class="footer_blog_title"><a href="blog.html">Travel with us this year</a></div>
+                      <div class="footer_blog_date">Nov 29, 2017</div>
+                    </div>
+                  </div>
+    
+                </div>
+              </div>
+            </div>
+    
+    
+            <!-- Footer Column -->
+            <div class="col-lg-3 footer_column">
+              <div class="footer_col">
+                <div class="footer_title">contact info</div>
+                <div class="footer_content footer_contact">
+                  <ul class="contact_info_list">
+                    <li class="contact_info_item d-flex flex-row">
+                      <div><div class="contact_info_icon"><img src="images/placeholder.svg" alt=""></div></div>
+                      <div class="contact_info_text">4127 Raoul Wallenber 45b-c Gibraltar</div>
+                    </li>
+                    <li class="contact_info_item d-flex flex-row">
+                      <div><div class="contact_info_icon"><img src="images/phone-call.svg" alt=""></div></div>
+                      <div class="contact_info_text">2556-808-8613</div>
+                    </li>
+                    <li class="contact_info_item d-flex flex-row">
+                      <div><div class="contact_info_icon"><img src="images/message.svg" alt=""></div></div>
+                      <div class="contact_info_text"><a href="mailto:contactme@gmail.com?Subject=Hello" target="_top">contactme@gmail.com</a></div>
+                    </li>
+                    <li class="contact_info_item d-flex flex-row">
+                      <div><div class="contact_info_icon"><img src="images/planet-earth.svg" alt=""></div></div>
+                      <div class="contact_info_text"><a href="https://colorlib.com">www.colorlib.com</a></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </div>
+      </footer>
+</body>
+</html>
