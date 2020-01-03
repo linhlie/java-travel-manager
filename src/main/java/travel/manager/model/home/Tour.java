@@ -37,6 +37,4 @@ public class Tour {
     private float discount;
 
     private int totalDays;
-    @Column(name = "image_id")
-    private int imagesId;
 }

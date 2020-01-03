@@ -122,6 +122,12 @@ function getOrdersByEmail(email, onSuccess, onError) {
     var url ="/tour/order/"+email;
     _get(url, onSuccess, onError);
 }
+
+function postComment(comment, onSuccess, onError) {
+    var url ="/tour/comment/"+comment;
+    _get(url, onSuccess, onError);
+}
+
 function getPaid(string, onSuccess, onError) {
     var url ="http://localhost:9999/bank/users/"+string;
     _get(url, onSuccess, onError);

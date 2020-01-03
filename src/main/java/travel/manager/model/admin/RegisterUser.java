@@ -16,6 +16,4 @@ public class RegisterUser {
 
     private String birthday;
 
-    private Long imageId;
-
 }

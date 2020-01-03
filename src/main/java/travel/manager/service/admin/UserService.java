@@ -83,7 +83,7 @@ public class UserService {
                     user.setPhone(registerUser.getPhone());
                     user.setFullName(registerUser.getFullName());
                     user.setBirthday(registerUser.getBirthday());
-                    user.setImageId(registerUser.getImageId());
+                    user.setImageId((long) 44);
                     HashSet<Role> roles = new HashSet<>();
                     roles.add(roleRepository.findByName("ROLE_MEMBER"));
                     user.setRoles(roles);

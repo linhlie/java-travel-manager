@@ -10,6 +10,7 @@ import travel.manager.message.AjaxResponseBody;
 import travel.manager.message.TourResponeBody;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.*;
+import travel.manager.repository.admin.UserRepository;
 import travel.manager.service.admin.UserService;
 import travel.manager.service.home.*;
 
@@ -35,6 +36,9 @@ public class TourController {
 
     @Autowired
     private CategoryTourService categoryTourService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping(value = {"/index","/"})
     public String index(Model model, Principal principal) {
@@ -160,6 +164,28 @@ public class TourController {
             result.setToursCart(tours);
             result.setMsg("Image");
             result.setStatus(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+            result.setStatus(false);
+        }
+        return ResponseEntity.ok(result);
+    }
+
+    @RequestMapping(value = { "/tour/comment/{string}" }, method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> postComment(@PathVariable("string") String string, Principal principal) {
+        TourResponeBody result = new TourResponeBody();
+        try {
+            org.springframework.security.core.userdetails.User loginedUser = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
+
+            User user = userRepository.findByEmail(loginedUser.getUsername());
+
+            if(commentService.createdComment(user.getId(),string)){
+                result.setMsg("Add comment success!");
+                result.setStatus(true);
+            }
+            else
+                result.setStatus(false);
         } catch (Exception e) {
             result.setMsg(e.getMessage());
             result.setStatus(false);

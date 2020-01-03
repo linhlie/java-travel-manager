@@ -359,5 +359,46 @@
 
         }
     });
+    $(document).on("click",".comment-message", function () {
+        if (sessionLogin()){
+        }
+        else {
+            alert("Bạn cần phải đăng nhập");
+            window.location.replace("http://localhost:8888/login");
+
+        }
+    });
+    $(document).on("click",".submit-comment", function () {
+        if (sessionLogin()){
+            var content = $("#message").val();
+            var id = sessionStorage.getItem("dataId");
+            content+= ',' + id;
+            console.log(content)
+            if (content!=null &&content.trim() !="") {
+                commentMessage(content);
+                function commentMessage(conten) {
+                    function onSuccess(response) {
+                        if (response&&response.status){
+                            location.reload();
+                        }
+
+                    }
+                    function onError(e) {
+                        console.log(e)
+
+                    }
+                    postComment(conten,onSuccess,onError)
+
+                }
+            }else {
+                alert("Bạn chưa nhập comment")
+            }
+        }
+        else {
+            alert("Bạn cần phải đăng nhập");
+            window.location.replace("http://localhost:8888/login");
+
+        }
+    });
 
 })(jQuery);

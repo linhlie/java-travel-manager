@@ -62,8 +62,6 @@ public class MainController {
 
 			result.setJsonUser(userRepository.findByEmail(loginedUser.getUsername()).toString());
 
-			System.out.println();
-
 			result.setMsg("done");
 			result.setStatus(true);
 

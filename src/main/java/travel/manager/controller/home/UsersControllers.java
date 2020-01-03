@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import travel.manager.dto.UserDtoComment;
 import travel.manager.dto.UserRequest;
+import travel.manager.filestorage.FileStorage;
 import travel.manager.message.AjaxResponseBody;
 import travel.manager.model.admin.RegisterUser;
 import travel.manager.model.admin.User;
@@ -28,6 +30,9 @@ public class UsersControllers {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    FileStorage fileStorage;
 
 
     @RequestMapping(value = { "/users/tourDetails" }, method = RequestMethod.GET)
@@ -63,6 +68,17 @@ public class UsersControllers {
             System.out.println("OK");
         }
         return "redirect:/login";
+    }
+    @PostMapping("/user/uploadImage")
+    public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model) {
+        try {
+            System.out.println(file.getOriginalFilename());
+            fileStorage.store(file);
+            model.addAttribute("message", "File uploaded successfully! -> filename = " + file.getOriginalFilename());
+        } catch (Exception e) {
+            model.addAttribute("message", "Fail! -> uploaded filename: " + file.getOriginalFilename());
+        }
+        return "redirect:/profile";
     }
 
 }
