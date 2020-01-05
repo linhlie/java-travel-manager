@@ -132,3 +132,17 @@ function getPaid(string, onSuccess, onError) {
     var url ="http://localhost:9999/bank/users/"+string;
     _get(url, onSuccess, onError);
 }
+
+function getOrder(id, onSuccess, onError) {
+    var url ="/order/getOne/"+id;
+    _get(url, onSuccess, onError);
+}
+
+function getUserByID(id, onSuccess, onError) {
+    var url ="/order/user/"+id;
+    _get(url, onSuccess, onError);
+}
+function getOrderTourById(id, onSuccess, onError) {
+    var url ="/order/tours/"+id;
+    _get(url, onSuccess, onError);
+}

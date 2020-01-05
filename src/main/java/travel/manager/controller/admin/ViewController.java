@@ -170,8 +170,9 @@ public class ViewController {
         orderService.deletedOrder(id);
         return "redirect:/admin/order";
     }
-    @GetMapping("/admin/{id}/order")
+    @GetMapping("/admin/order/{id}")
     public String Orders(Model model,@PathVariable Integer id){
+        System.out.println(id);
         model.addAttribute("order",orderService.getOrdersById(id));
         return "admin/OrderDetails";
     }

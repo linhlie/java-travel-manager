@@ -52,15 +52,15 @@
                             <div class="col-md-6">
                                 <address>
                                     <strong>Thông tin cá nhân: <p></p></strong><br>
-                                   <strong>Họ và tên:</strong> <p></p><br> <br>
-                                    <strong>Email:</strong> Main123@gmail.com<br> <br>
-                                    <strong>Số điện thoại:</strong>0983243728<br> <br>
+                                    <strong>Họ và tên:</strong> <p id="fullName"></p>
+                                    <strong>Email:</strong><br> <p id="email"></p>
+                                    <strong>Số điện thoại:</strong><p id="phone"></p>
                                 </address>
                             </div>
                             <div class="col-md-6">
                                 <address>
                                     <strong>Thời gian:</strong><br>
-                                    Ngày đặt: 02/03/2020<br>
+                                    <p id="ordersDate"></p>
                                     <br>
                                 </address>
                             </div>
@@ -76,60 +76,16 @@
                                     <table class="table table-condensed">
                                         <thead>
                                         <tr>
-                                            <td><strong>Tên tour du lịch</strong></td>
-                                            <td class="text-center"><strong>Đơn giá</strong></td>
-                                            <td class="text-center"><strong>Số người tham gia</strong></td>
-                                            <td class="text-center"><strong>Khuyến mại</strong></td>
-                                            <td class="text-center"><strong>Ngày khởi hành</strong></td>
-                                            <td class="text-right"><strong>Tổng</strong></td>
+                                        <th><strong>Tên tour du lịch</strong></th>
+                                        <th class="text-center"><strong>Đơn giá</strong></th>
+                                        <th class="text-center"><strong>Số người tham gia</strong></th>
+                                        <th class="text-center"><strong>Khuyến mại</strong></th>
+                                        <th class="text-center"><strong>Ngày khởi hành</strong></th>
+                                        <th class="text-right"><strong>Tổng</strong></th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
-                                        <tr>
-                                            <td>Du lịch chùa Hương</td>
-                                            <td class="text-center">$100</td>
-                                            <td class="text-center">5</td>
-                                            <td class="text-center">0</td>
-                                            <td class="text-center">01/01/2020</td>
-                                            <td class="text-right">$500</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Du lịch Việt Nam</td>
-                                            <td class="text-center">$20.00</td>
-                                            <td class="text-center">3</td>
-                                            <td class="text-center">0</td>
-                                            <td class="text-center">01/01/2020</td>
-                                            <td class="text-right">$60.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Du lịch Pháp</td>
-                                            <td class="text-center">$600.00</td>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">0</td>
-                                            <td class="text-center">01/01/2020</td>
-                                            <td class="text-right">$600.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="thick-line"></td>
-                                            <td class="thick-line"></td>
-                                            <td class="thick-line"></td>
-                                            <td class="thick-line"></td>
-                                            <td class="thick-line text-center"><strong>Tổng tiền:</strong></td>
-                                            <td class="thick-line text-right">$670.99</td>
-                                        </tr>
-<!--                                        <tr>-->
-<!--                                            <td class="no-line"></td>-->
-<!--                                            <td class="no-line"></td>-->
-<!--                                            <td class="no-line text-center"><strong>Shipping</strong></td>-->
-<!--                                            <td class="no-line text-right">$15</td>-->
-<!--                                        </tr>-->
-<!--                                        <tr>-->
-<!--                                            <td class="no-line"></td>-->
-<!--                                            <td class="no-line"></td>-->
-<!--                                            <td class="no-line text-center"><strong>Total</strong></td>-->
-<!--                                            <td class="no-line text-right">$685.99</td>-->
-<!--                                        </tr>-->
+                                        <tbody class="orderDetails">
+
                                         </tbody>
                                     </table>
 
@@ -154,7 +110,7 @@
 <script src="plugins/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
 <script src="plugins/js/parallax.min.js"></script>
-<script src="js/home/cart.js"></script>
+<script src="js/home/orderDetail.js"></script>
 <script src="js/api.js"></script>
 
 </body>

@@ -28,4 +28,10 @@ public class UserDto {
         this.birthday = birthday;
         this.imageId = imageId;
     }
+    public UserDto(int id, String email, String phone, String fullName) {
+        this.id = id;
+        this.email = email;
+        this.phone = phone;
+        this.fullName = fullName;
+    }
 }
