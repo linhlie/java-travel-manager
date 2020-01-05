@@ -230,7 +230,7 @@
 				<h1>Tour Manager </h1>
 			</div><!-- /.page-header -->
 			<div class="modal-footer no-margin-top">
-				<a href="AddTour.html">
+				<a th:href="@{/admin/addNews}">
 					<button class="btn btn-sm btn-active pull-left" data-dismiss="modal">
 						<i class="ace-icon fa fa-plus"></i>
 						Add new
@@ -271,7 +271,7 @@
 						<div class="col-xs-12">
 
 							<div class="table-header">
-								Results for "All Tour in database"
+								Danh sách tin tức
 							</div>
 
 							<!-- div.table-responsive -->
@@ -288,57 +288,39 @@
 											</label>
 										</th>
 										<th>ID</th>
-										<th>Tên Tour du lịch</th>
-										<th class="hidden-480">Giá gốc</th>
+										<th class="hidden-480">Tiêu đề</th>
 										<th>
-											Giá khuyến mại
+											Mô tả ngắn
 										</th>
-										<th>Ngày khởi hành</th>
-										<th class="hidden-480">Nơi khởi hành</th>
-										<th>Ảnh</th>
-										<th>Số lượng khách</th>
-										<th>Loại Tour</th>
-										<th>Điểm đến</th>
+										<th>Ngày tạo</th>
 										<th>Action</th>
 
 									</tr>
 									</thead>
 
 									<tbody>
-									<tr>
+									<tr th:each="newss : ${news}">
 										<td class="center">
 											<label class="pos-rel">
 												<input type="checkbox" class="ace" />
 												<span class="lbl"></span>
 											</label>
 										</td>
-										<td>
-											id
-										</td>
-										<td>
-											<a href="">Title</a>
-										</td>
-										<td>lorem kjbkbkj</td>
-										<td class="hidden-480">Feb 12</td>
-										<td>sd</td>
-										<td>fdf</td>
-										<td>fdfdf</td>
-										<td>dfjlknlk</td>
-										<td>kjbkjkj</td>
+										<td th:text="${newss.getNews_id()}"></td>
+										<th th:text="${newss.getTitle()}"></th>
+										<td th:text="${newss.getNewsSummary()}"></td>
 
-										<td class="hidden-480">
-											<span class="label label-sm label-warning">Expiring</span>
-										</td>
+										<td th:text="${newss.getCreateAt()}"></td>
 
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
 
 
-												<a class="green" href="EditTour.html">
+												<a class="green" th:href="@{/admin/news/{id}/edit(id=${newss.getNews_id()})}">
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
-												<a class="red" href="#" onclick="return confirm('Delete this news?')">
+												<a class="red" th:href="@{/admin/news/{id}/delete(id=${newss.getNews_id()})}" onclick="return confirm('Delete this news?')">
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>

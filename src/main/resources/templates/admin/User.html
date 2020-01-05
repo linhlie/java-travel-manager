@@ -271,7 +271,7 @@
 						<div class="col-xs-12">
 
 							<div class="table-header">
-								Results for "All Tour in database"
+								Danh sách thành viên
 							</div>
 
 							<!-- div.table-responsive -->
@@ -288,47 +288,35 @@
 											</label>
 										</th>
 										<th>ID</th>
-										<th>Tên Tour du lịch</th>
-										<th class="hidden-480">Giá gốc</th>
+										<th>Họ và tên</th>
+										<th class="hidden-480">Email</th>
 										<th>
-											Giá khuyến mại
+											Số điện thoại
 										</th>
-										<th>Ngày khởi hành</th>
-										<th class="hidden-480">Nơi khởi hành</th>
+										<th>Ngày sinh</th>
+										<th class="hidden-480">Ngày tạo</th>
 										<th>Ảnh</th>
-										<th>Số lượng khách</th>
-										<th>Loại Tour</th>
-										<th>Điểm đến</th>
 										<th>Action</th>
-
 									</tr>
 									</thead>
 
 									<tbody>
-									<tr>
+									<tr th:each="user : ${users}">
 										<td class="center">
 											<label class="pos-rel">
 												<input type="checkbox" class="ace" />
 												<span class="lbl"></span>
 											</label>
 										</td>
-										<td>
-											id
+										<td th:text="${user.getId()}">
 										</td>
-										<td>
-											<a href="">Title</a>
+										<td th:text="${user.getFullName()}">
 										</td>
-										<td>lorem kjbkbkj</td>
-										<td class="hidden-480">Feb 12</td>
-										<td>sd</td>
-										<td>fdf</td>
-										<td>fdfdf</td>
-										<td>dfjlknlk</td>
-										<td>kjbkjkj</td>
-
-										<td class="hidden-480">
-											<span class="label label-sm label-warning">Expiring</span>
-										</td>
+										<td th:text="${user.getEmail()}"></td>
+										<td th:text="${user.getPhone()}" ></td>
+										<td th:text="${user.getBirthday()}"></td>
+										<td th:text="${user.getCreatedAt()}"></td>
+										<td th:text="${user.getImageId()}"></td>
 
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
@@ -338,7 +326,7 @@
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
-												<a class="red" href="#" onclick="return confirm('Delete this news?')">
+												<a class="red" th:href="@{/admin/user/{id}/delete(id=${user.getId()})}" onclick="return confirm('Delete this user?')">
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>

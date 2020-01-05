@@ -13,4 +13,9 @@ public interface OrderRepository  extends JpaRepository<Order,Integer> {
 
     @Query(value = "select * from orders where user_id=:id", nativeQuery = true)
     List<Order> findByUserId(@Param("id") int id);
+    @Query(value = "select orders.orders_id, user.full_name, user.email, orders.is_paid, orders.orders_date\n" +
+            "from user join orders on user.id = orders.user_id",nativeQuery = true)
+    List<Object[]> getInfoOrder();
+    @Query(value = "select  * from orders where orders_id=:id",nativeQuery = true)
+    List<Order> findByOrOrdersId(@Param("id") int id);
 }

@@ -8,5 +8,5 @@ import travel.manager.model.home.News;
 @Repository
 public interface NewsRepository extends JpaRepository<News,Integer> {
     @Query(value = "select * from tour_manager.news where news_id = ?", nativeQuery = true)
-    News getNews(int id);
+    News getNewsById(int id);
 }

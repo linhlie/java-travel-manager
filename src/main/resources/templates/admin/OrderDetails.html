@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Travelix Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" href="plugins/bootstrap4/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles/responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/demo.css">
+    <link rel="stylesheet" href="https://printjs-4de6.kxcdn.com/print.min.css">
+    <script src=" https://printjs-4de6.kxcdn.com/print.min.js"></script>
+    <style>
+        body {
+            background: #eecda3;
+            background: -webkit-linear-gradient(to right, #eecda3, #ef629f);
+            background: linear-gradient(to right, #fa9e1b, #8d4fff);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+
+<div class="px-4 px-lg-0">
+    <!-- For demo purpose -->
+    <div class="container text-white py-5 text-center">
+        <div>
+            <p></p>
+            <p></p>
+        </div>
+
+    </div>
+    <!-- End -->
+
+    <div class="pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5" id="order_print">
+                    <div class="col-xs-12">
+                        <div class="invoice-title">
+                            <h2>Hóa đơn</h2>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <address>
+                                    <strong>Thông tin cá nhân: <p></p></strong><br>
+                                   <strong>Họ và tên:</strong> <p></p><br> <br>
+                                    <strong>Email:</strong> Main123@gmail.com<br> <br>
+                                    <strong>Số điện thoại:</strong>0983243728<br> <br>
+                                </address>
+                            </div>
+                            <div class="col-md-6">
+                                <address>
+                                    <strong>Thời gian:</strong><br>
+                                    Ngày đặt: 02/03/2020<br>
+                                    <br>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><strong>Chi tiết hóa đơn</strong></h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed">
+                                        <thead>
+                                        <tr>
+                                            <td><strong>Tên tour du lịch</strong></td>
+                                            <td class="text-center"><strong>Đơn giá</strong></td>
+                                            <td class="text-center"><strong>Số người tham gia</strong></td>
+                                            <td class="text-center"><strong>Khuyến mại</strong></td>
+                                            <td class="text-center"><strong>Ngày khởi hành</strong></td>
+                                            <td class="text-right"><strong>Tổng</strong></td>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                        <tr>
+                                            <td>Du lịch chùa Hương</td>
+                                            <td class="text-center">$100</td>
+                                            <td class="text-center">5</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">01/01/2020</td>
+                                            <td class="text-right">$500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Du lịch Việt Nam</td>
+                                            <td class="text-center">$20.00</td>
+                                            <td class="text-center">3</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">01/01/2020</td>
+                                            <td class="text-right">$60.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Du lịch Pháp</td>
+                                            <td class="text-center">$600.00</td>
+                                            <td class="text-center">1</td>
+                                            <td class="text-center">0</td>
+                                            <td class="text-center">01/01/2020</td>
+                                            <td class="text-right">$600.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line text-center"><strong>Tổng tiền:</strong></td>
+                                            <td class="thick-line text-right">$670.99</td>
+                                        </tr>
+<!--                                        <tr>-->
+<!--                                            <td class="no-line"></td>-->
+<!--                                            <td class="no-line"></td>-->
+<!--                                            <td class="no-line text-center"><strong>Shipping</strong></td>-->
+<!--                                            <td class="no-line text-right">$15</td>-->
+<!--                                        </tr>-->
+<!--                                        <tr>-->
+<!--                                            <td class="no-line"></td>-->
+<!--                                            <td class="no-line"></td>-->
+<!--                                            <td class="no-line text-center"><strong>Total</strong></td>-->
+<!--                                            <td class="no-line text-right">$685.99</td>-->
+<!--                                        </tr>-->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                    <button type="button" class="btn btn-success book" onclick="
+                     printJS({ printable: 'order_print', type: 'html',css:['plugins/bootstrap4/bootstrap.min.css', 'css/styles/main_styles.css','css/demo.css','plugins/OwlCarousel2-2.2.1/owl.carousel.css','plugins/OwlCarousel2-2.2.1/owl.theme.default.css','plugins/OwlCarousel2-2.2.1/animate.css','css/styles/responsive.css']})">Export</button>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="plugins/js/jquery-3.2.1.min.js"></script>
+<script src="plugins/bootstrap4/popper.js"></script>
+<script src="plugins/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+<script src="plugins/js/parallax.min.js"></script>
+<script src="js/home/cart.js"></script>
+<script src="js/api.js"></script>
+
+</body>
+</html>

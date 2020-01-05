@@ -29,7 +29,9 @@ public class UserService {
     private RoleRepository roleRepository;
 
 
-
+    public List<User> getAll(){
+        return userRepository.findAlls();
+    }
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -98,4 +100,7 @@ public class UserService {
             return false;
         }
     }
+   public void deleteUser(Integer id){
+        userRepository.deleteById(id);
+   }
 }

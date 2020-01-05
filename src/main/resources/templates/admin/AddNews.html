@@ -8,7 +8,7 @@
 
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+		<base href="/">
 		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
 
@@ -236,18 +236,18 @@
 						</div><!-- /.page-header -->
 						
 							<br>
-                            <form class="form-horizontal" role="form" action="" method="POST">
+                            <form class="form-horizontal" role="form" action="" th:action="@{/admin/saveNews}" th:object="${news}" method="post" novalidate="novalidate">
                                     <div class="form-group">
                                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Category </label>
     
                                             <div class="col-sm-9">
-                                            
-															<select>
-																<option value="Select">Select</option>
-																<option value="AL">Alabama</option>
-																<option value="AK">Alaska</option>
-																
-															</select>
+
+												<select th:field="*{category_newsId}">
+													<option th:each="catess : ${categoryNews}"
+															th:value="${catess.category_news_id}"
+															th:text="${catess.category_news_name}" />
+
+												</select>
 														
                                             </div>
                                         </div>    
@@ -255,7 +255,7 @@
                                             <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Title </label>
     
                                             <div class="col-sm-9">
-                                                <input type="text" id="form-field-1" placeholder="Title news" class="col-xs-10 col-sm-5" />
+                                                <input type="text" id="form-field-1" th:field="*{title}" placeholder="Title news" class="col-xs-10 col-sm-5" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -263,7 +263,7 @@
         
                                                 <div class="col-sm-9">
                                                     
-                                                <textarea rows="5" cols="53" placeholder="Summary title"></textarea>
+                                                <textarea rows="5" cols="53" th:field="*{newsSummary}" placeholder="Summary title"></textarea>
                                                 </div>
                                         </div>
                                         <div class="form-group">
@@ -279,13 +279,13 @@
                                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Content</label>
         
                                                 <div class="col-sm-9">
-                                                        <textarea id="editor" name="text"></textarea>
+                                                        <textarea id="editor" name="text" th:field="*{newsContent}"></textarea>
                                                 </div>
                                             </div>
                                        
                                             <div class="clearfix form-actions">
                                                     <div class="col-md-offset-5 col-md-9">
-                                                        <button class="btn btn-info" type="button">
+                                                        <button class="btn btn-info" type="submit">
                                                             <i class="ace-icon fa fa-check bigger-110"></i>
                                                             Submit
                                                         </button>
@@ -297,6 +297,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
+								<input type="hidden" th:field="*{news_id}">
                             </form>
 					</div>
 				

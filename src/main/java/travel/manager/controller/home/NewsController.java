@@ -61,7 +61,7 @@ public class NewsController {
     public ResponseEntity<?> getNewsDetails(@PathVariable("id") int id) {
         TourResponeBody result = new TourResponeBody();
         try {
-            News news = newsService.getNews(id);
+            News news = newsService.getNewsById(id);
             result.setNews(news);
 
             List<Image>imagesPlaces = imageService.getImageNews(id);

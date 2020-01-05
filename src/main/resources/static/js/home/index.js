@@ -50,7 +50,7 @@
                 var images =[];//images tours
                 list = response.tours;
                 images=response.imagesTours;
-                    for (var i =0;i<list.length;i++){
+                    for (var i =0;i<9;i++){
                      var _html= '<div class="col-lg-4 intro_col mb-4">'+
                         '<div class="intro_item">'+
                         '<div class="intro_item_overlay"></div>'+

@@ -31,4 +31,6 @@ public class News {
     @Column(name="create_by")
     private int createByl;
 
+    @Column(name = "title")
+    private String title;
 }

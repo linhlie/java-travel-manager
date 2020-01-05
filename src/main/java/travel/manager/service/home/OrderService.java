@@ -2,14 +2,15 @@ package travel.manager.service.home;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import travel.manager.model.admin.OrdersDTO;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.Order;
 import travel.manager.repository.home.OrderRepository;
 import travel.manager.service.admin.UserService;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,8 +29,8 @@ public class OrderService {
         Order order = new Order();
         User user = userService.getUserByEmail(arrOrder[2]);
         order.setUserId(user.getId());
-        order.setTourId(Long.parseLong(arrOrder[1]));
-        order.setTotalPeople(Integer.parseInt(arrOrder[0]));
+//        order.setTourId(Long.parseLong(arrOrder[1]));
+//        order.setTotalPeople(Integer.parseInt(arrOrder[0]));
         order.setOrdersDate(new Timestamp(System.currentTimeMillis()));
         orderRepository.save(order);
         return order;
@@ -38,7 +39,21 @@ public class OrderService {
     public List<Order> getOrders() {
         return orderRepository.findAll();
     }
-
+    public List<Order> getOrdersById(int id) {return orderRepository.findByUserId(id);}
+    public List<OrdersDTO> getAllOrders(){
+        List<Object[]> objects = orderRepository.getInfoOrder();
+        List<OrdersDTO> ordersDTOS = new ArrayList<>();
+        for (Object[] obj : objects){
+            OrdersDTO ordersDTO = new OrdersDTO();
+            ordersDTO.setOrders_id(Integer.parseInt((String.valueOf(obj[0]))));
+            ordersDTO.setFull_name((String.valueOf(obj[1])));
+            ordersDTO.setEmail((String.valueOf(obj[2])));
+            ordersDTO.setIs_paid(Boolean.parseBoolean((String.valueOf(obj[3]))));
+            ordersDTO.setOrders_date(String.valueOf(obj[4]));
+            ordersDTOS.add(ordersDTO);
+        }
+        return ordersDTOS;
+    }
     public List<Order> getOrdersByIdUser(String email) {
         int id = userService.getUserByEmail(email).getId();
         List<Order> orders = orderRepository.findByUserId(id);

@@ -288,47 +288,33 @@
 											</label>
 										</th>
 										<th>ID</th>
-										<th>Tên Tour du lịch</th>
-										<th class="hidden-480">Giá gốc</th>
+										<th>Họ và tên</th>
+										<th>Email</th>
+										<th>Ngày đặt</th>
 										<th>
-											Giá khuyến mại
+											Trạng thái thanh toán
 										</th>
-										<th>Ngày khởi hành</th>
-										<th class="hidden-480">Nơi khởi hành</th>
-										<th>Ảnh</th>
-										<th>Số lượng khách</th>
-										<th>Loại Tour</th>
-										<th>Điểm đến</th>
+
 										<th>Action</th>
 
 									</tr>
 									</thead>
 
 									<tbody>
-									<tr>
+									<tr th:each="orderss : ${orders}">
 										<td class="center">
 											<label class="pos-rel">
 												<input type="checkbox" class="ace" />
 												<span class="lbl"></span>
 											</label>
 										</td>
-										<td>
-											id
+										<td th:text="${orderss.getOrders_id()}">
 										</td>
-										<td>
-											<a href="">Title</a>
-										</td>
-										<td>lorem kjbkbkj</td>
-										<td class="hidden-480">Feb 12</td>
-										<td>sd</td>
-										<td>fdf</td>
-										<td>fdfdf</td>
-										<td>dfjlknlk</td>
-										<td>kjbkjkj</td>
+										<td th:text="${orderss.getFull_name()}"></td>
+										<td th:text="${orderss.getEmail()}"></td>
+										<td class="hidden-480" th:text="${orderss.getOrders_date()}"></td>
+										<td th:text="${orderss.isIs_paid()}"></td>
 
-										<td class="hidden-480">
-											<span class="label label-sm label-warning">Expiring</span>
-										</td>
 
 										<td>
 											<div class="hidden-sm hidden-xs action-buttons">
@@ -338,7 +324,7 @@
 													<i class="ace-icon fa fa-pencil bigger-130"></i>
 												</a>
 
-												<a class="red" href="#" onclick="return confirm('Delete this news?')">
+												<a class="red" th:href="@{/admin/order/{id}/delete(id=${orderss.getOrders_id()})}" onclick="return confirm('Delete this order?')">
 													<i class="ace-icon fa fa-trash-o bigger-130"></i>
 												</a>
 											</div>

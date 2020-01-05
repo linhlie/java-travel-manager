@@ -14,8 +14,14 @@ public class NewsService{
     public List<News>getAll(){
         return newsRepository.findAll();
     }
+    public News getNewsById(Integer id) {
+        return newsRepository.getNewsById(id);
+    }
 
-    public News getNews(int id) {
-        return newsRepository.getNews(id);
+    public void save(News news){
+        newsRepository.save(news);
+    }
+    public void deleteNews(Integer id){
+        newsRepository.deleteById(id);
     }
 }

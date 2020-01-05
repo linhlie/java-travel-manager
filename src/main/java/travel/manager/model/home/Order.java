@@ -1,9 +1,12 @@
 package travel.manager.model.home;
 
 import lombok.Data;
+import travel.manager.model.admin.User;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -20,7 +23,9 @@ public class Order {
 
     private boolean isPaid;
 
-    private long tourId;
+//    private long tourId;
+//
+//    private int totalPeople;
+//    @JoinTable(name = "user", joinColumns = @JoinColumn(name = "user_id"),  inverseJoinColumns = @JoinColumn(name = "orders_id"))
 
-    private int totalPeople;
 }
