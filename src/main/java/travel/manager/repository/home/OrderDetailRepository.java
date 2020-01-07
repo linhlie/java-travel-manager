@@ -21,5 +21,10 @@ public interface OrderDetailRepository extends JpaRepository<OrdersDetails,Integ
     @Query(value = "INSERT INTO orders_details (orders_id, tour_id, total_price, total_user) VALUES (:orders_id, :tour_id, :total_price , :total_user)", nativeQuery = true)
     @Transactional
     void saveS(@Param("orders_id") int orders_id, @Param("tour_id") int tour_id, @Param("total_price") float total_price, @Param("total_user") int total_user);
+
+    @Query(value = "select month(orders_date) as 'thang', sum(total_price) as 'tongtien'\n" +
+            "from orders join orders_details on  orders.orders_id = orders_details.orders_id\n" +
+            "where year(orders_date)=:year group by  month(orders_date) ORDER BY thang asc", nativeQuery = true)
+    List<Object[]> findTourByYear(int  year);
 }
 

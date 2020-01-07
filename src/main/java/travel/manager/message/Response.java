@@ -1,6 +1,7 @@
 package travel.manager.message;
 
 import lombok.Data;
+import travel.manager.dto.Analytics;
 import travel.manager.dto.OrderDetailBillDTO;
 import travel.manager.model.admin.UserDto;
 import travel.manager.model.home.OrdersDetails;
@@ -16,6 +17,8 @@ public class Response {
 	private Object data;
 	private UserDto userDto;
 	private List<OrderDetailBillDTO> ordersDetails;
+	private List<Analytics>analytics;
+	private List listMoney;
 
 	
 	public Response(){

@@ -58,6 +58,10 @@ function deleteOrderTour(id, onSuccess, onError) {
     var url = "/order/deleted/"+id;
     _get(url, onSuccess, onError);
 }
+function getData(year, onSuccess, onError) {
+    var url = "/order/revenue/"+year;
+    _get(url, onSuccess, onError);
+}
 
 function getPlaceDetails(id, onSuccess, onError) {
     var url = "/place/"+id;
