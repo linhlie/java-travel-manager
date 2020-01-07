@@ -23,9 +23,4 @@ public class Order {
 
     private boolean isPaid;
 
-//    private long tourId;
-//
-//    private int totalPeople;
-//    @JoinTable(name = "user", joinColumns = @JoinColumn(name = "user_id"),  inverseJoinColumns = @JoinColumn(name = "orders_id"))
-
 }

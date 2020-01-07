@@ -2,7 +2,7 @@
     var _login;
     var array  = [];
     var cate=[];
-    var _htmlOrder="";
+    var idUser;
     $(function () {
         sessionLogin();
         checkCart();
@@ -12,6 +12,7 @@
         var login = sessionStorage.getItem("login");
         _login =login;
         if(login!=null){
+            loadUser(login);
             var html='<a href="/profile">'+login+'</a>';
             $("#login-form").attr("style", "display: none;");
             $("#sign-up").attr("style", "display: none;");
@@ -31,6 +32,7 @@
     function checkCart() {
         var login = sessionStorage.getItem("login");
         var string = localStorage.getItem(login);
+        var orders = localStorage.getItem("orders");
         if (string==null||string==""){
             $(".test_cart").remove();
             htmlCart="";
@@ -39,16 +41,34 @@
         else {
             array = string.split(",");
             if (array.length > 0) {
-                loadDataCart(string)
+                loadDataCart(orders)
                 var htmlCart = '<a href="/cart"><i class="fa fa-shopping-cart" style="font-size: 25px;"></i><span class="shop-cart"> <span class="secondary">' + array.length + '</span></span></a>'
             }
         }
         $(".test_cart").html(htmlCart);
     }
-    $(document).on("click",".test", function () {
-        var dataId = $(this).attr("data-id");
-        sessionStorage.setItem("dataId",dataId)
-    });
+    function loadUser(login) {
+        var email = login;
+        function onSuccess(response) {
+            if (response && response.status){
+                console.log(response)
+                var userText = response.jsonUser;
+                var user  = [];
+                user = userText.split(",");
+                $("#id").val(user[0]);
+                $("#email").val(user[1]);
+                $("#phone").val(user[2]);
+                $("#fullName").val(user[3]);
+                $("#birthday").val(user[4]);
+            }
+        }
+        function onError(error) {
+            console.error("load data fail!");
+        }
+
+
+        getUser(email, onSuccess, onError);
+    }
     function loadDataCart(data) {
         var _htmlCart="";
         console.log(data)
@@ -58,43 +78,34 @@
                 var toursCart =[];
                 toursCart =response.toursCart;
                 var money=0;
+                var bill ="";
+                var cus =[];
+                cus = localStorage.getItem("cus").split(",");
                 for (var i=0;i<toursCart.length;i++) {
                     var discount = toursCart[i].discount*100;
-                    var pay = toursCart[i].price - toursCart[i].price*toursCart[i].discount;
+                    var pay = (toursCart[i].price - toursCart[i].price*toursCart[i].discount)*cus[i];
                     money+=pay;
+                    bill+=toursCart[i].tourId+'-'+cus[i]+',';
+
                     var html = '<tr>' +
                         '<th scope="row" class="border-0">' +
-                        '<div class="p-2">' +
-                        '<img src="images/icon/airplane.png" alt="" width="70" class="img-fluid rounded shadow-sm" style="height: 40px;width: 40px;">' +
-                        '<div class="ml-3 d-inline-block align-middle">' +
                         '<h5 class="mb-0 test" id="testid" data-id="'+toursCart[i].tourId+'"><a href="/details.html" >'+toursCart[i].tourName+'<span></span></a></h5>' +
                         '</div> </div></th>' +
                         '<td class="border-0 align-middle"><strong>' + toursCart[i].price + '$</strong></td>' +
                         '<td class="border-0 align-middle"><strong>' + discount + '%</strong></td>' +
-                        '<td class="border-0 align-middle"><strong>' + toursCart[i].departureDate + '</strong></td>' +
-                        '<td class="border-0 align-middle">Max ='+toursCart[i].totalMember+'<input style="width: 60px;\n' +
-                        '    height: 30px;" type="number" name="quantity" min="1" max="'+toursCart[i].totalMember+'"class="total_cus"/></td>' +
-                        '<td class="border-0 align-middle"><a href="#" class="text-dark"><i data-id ="'+toursCart[i].tourId+'" class="fa fa-trash delete-trash"></i></a></td>' +
+                        '<td class="border-0 align-middle"><strong>'+cus[i]+'</strong></td>' +
+                        '<td class="border-0 align-middle"><strong>'+pay+'$</strong></td>' +
                         '</tr>';
                     _htmlCart += html;
 
                 }
-                var _html=
-                    '<tr>' +
-                    '<th scope="row" class="border-0">' +
-                    '<div class="p-2">' +
-                    '<img src="" alt="" width="70" class="img-fluid rounded shadow-sm" style="height: 40px;width: 40px;">' +
-                    '<div class="ml-3 d-inline-block align-middle">' +
-                    '<h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle"></a></h5>' +
-                    '</div> </div></th>' +
-                    '<td class="border-0 align-middle"><strong></strong></td>' +
-                    '<td class="border-0 align-middle"><strong></strong></td>' +
-                    '<td class="border-0 align-middle"><strong></strong></td>' +
-                    '<td><button type="button" class="btn btn-success paid">Thanh Toán</button></td>'+
-                    '<td><button type="button" class="btn btn-success removeAll" data-toggle="modal" data-target="#myModal">Xóa hết</button></td>'+
-                    '</tr>';
+                $("#bill").val(bill);
+                var _html='<tr>' +
+                '<td class="border-0 align-middle"><strong>Tổng tiền</strong></td>' +
+                '<td class="border-0 align-middle"><strong>$'+money+'</strong></td>' +
+                '</tr>';
                 _htmlCart+=_html;
-                $(".table-cart").html(_htmlCart);
+                $(".table-order").html(_htmlCart);
             }
         }
         function onError() {
@@ -102,17 +113,14 @@
         }
         getCart(data,onSuccess,onError);
     }
-
-    $(document).on("click",".removeAll", function () {
-        localStorage.clear(_login);
-        checkCart();
-        var html="";
-        $(".table-cart").html(html);
+    $(document).on("click",".test", function () {
+        var dataId = $(this).attr("data-id");
+        sessionStorage.setItem("dataId",dataId)
     });
 
     $(document).on("click",".delete-trash", function () {
         var dataId = $(this).attr("data-id");
-        var string = localStorage.getItem(_login).trim();
+        var string = localStorage.getItem(_login);
         var data=[];
         data = string.split(",");
         data = jQuery.grep(data, function(value) {
@@ -121,21 +129,5 @@
         localStorage.setItem(_login,data);
         location.reload();
     });
-    var cus = [];
-    $(document).on("click",".paid", function () {
-        $('.total_cus').each(function (i, el) {
-            var data = $(el).val();
-            if(data==null || data.trim() ==""){
-                data=1;
-            }
-            cus.push(data);
-        });
-        console.log(cus)
-        var string = localStorage.getItem(_login);
-        localStorage.setItem("orders",string);
-        localStorage.setItem("cus",cus)
-        window.location.replace("http://localhost:8888/tour/checkout")
-    });
-
 
 })(jQuery);

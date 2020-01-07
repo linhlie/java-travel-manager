@@ -2188,4 +2188,6 @@ section
 }
 .hidden {
 	display: none !important;
+}.hidden-class {
+	display: none !important;
 }

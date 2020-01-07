@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import travel.manager.dto.UserDtoComment;
 import travel.manager.dto.UserRequest;
 import travel.manager.filestorage.FileStorage;
+import travel.manager.filestorage.FileStorageImpl;
 import travel.manager.message.AjaxResponseBody;
 import travel.manager.model.admin.RegisterUser;
 import travel.manager.model.admin.User;
@@ -20,6 +21,8 @@ import travel.manager.service.admin.UserService;
 import travel.manager.service.home.ImageService;
 
 import javax.validation.Valid;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -32,7 +35,7 @@ public class UsersControllers {
     private ImageService imageService;
 
     @Autowired
-    FileStorage fileStorage;
+    FileStorageImpl fileStorage;
 
 
     @RequestMapping(value = { "/users/tourDetails" }, method = RequestMethod.GET)
@@ -72,11 +75,12 @@ public class UsersControllers {
     @PostMapping("/user/uploadImage")
     public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model) {
         try {
-            System.out.println(file.getOriginalFilename());
             fileStorage.store(file);
-            model.addAttribute("message", "File uploaded successfully! -> filename = " + file.getOriginalFilename());
+
+            Path rootLocation = Paths.get("/images/user");
+            Path p =rootLocation.resolve(file.getOriginalFilename());
+
         } catch (Exception e) {
-            model.addAttribute("message", "Fail! -> uploaded filename: " + file.getOriginalFilename());
         }
         return "redirect:/profile";
     }

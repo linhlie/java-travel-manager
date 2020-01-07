@@ -1,6 +1,5 @@
 package travel.manager.service.home;
 
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import travel.manager.dto.OrderDetailBillDTO;
@@ -12,10 +11,11 @@ import travel.manager.model.home.Tour;
 import travel.manager.repository.home.OrderRepository;
 import travel.manager.service.admin.UserService;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import travel.manager.model.home.OrderTour;
+import travel.manager.repository.admin.UserRepository;
+import travel.manager.repository.home.OrderDetailRepository;
+
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,24 +30,61 @@ public class OrderService {
     @Autowired
     private TourService tourService;
 
+    @Autowired
+    private UserRepository userRepository;
 
-    public Order addOrder(String data) {
-        LocalDateTime date = LocalDateTime.now();
-        String[] arrOrder= data.split(",");
-        Order order = new Order();
-        User user = userService.getUserByEmail(arrOrder[2]);
-        order.setUserId(user.getId());
-//        order.setTourId(Long.parseLong(arrOrder[1]));
-//        order.setTotalPeople(Integer.parseInt(arrOrder[0]));
-        order.setOrdersDate(new Timestamp(System.currentTimeMillis()));
-        orderRepository.save(order);
-        return order;
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+
+    public Boolean addOrder(OrderTour orderTour) {
+        User user = userRepository.findByIdUsers(orderTour.getId());
+        User user1 = new User(orderTour.getId(),orderTour.getEmail(),user.getPassword(),
+                orderTour.getPhone(),orderTour.getFullName(),orderTour.getBirthday(),user.getImageId(),user.getRoles());
+        userRepository.save(user1);
+
+        String[] arrTour = orderTour.getOrderTour().split(",");
+
+        Order order1= new Order();
+        order1.setUserId(orderTour.getId());
+        order1.setOrdersDate(new Timestamp(System.currentTimeMillis()));
+        order1.setPaid(false);
+
+        orderRepository.save(order1);
+
+        int ids = orderRepository.finOrderIdMax();
+
+        if(arrTour.length>0){
+            List<OrdersDetails>orderDetails = new ArrayList<>();
+            for (int i=0;i<arrTour.length;i++){
+                String[] arrOrder = arrTour[i].split("-");
+
+                Tour tour = tourService.findOne(Long.parseLong(arrOrder[0]));
+
+                OrdersDetails orderDetail = new OrdersDetails();
+                orderDetail.setOrders_id(ids);
+                orderDetail.setTotal_user(Integer.parseInt(arrOrder[1]));
+                orderDetail.setTotal_price(tour.getPrice() - tour.getPrice()*tour.getDiscount());
+                orderDetail.setTour_id(Integer.parseInt(arrOrder[0]));
+                orderDetails.add(orderDetail);
+                orderDetailRepository.saveS(orderDetail.getOrders_id(),orderDetail.getTour_id(),orderDetail.getTotal_price(),orderDetail.getTotal_user());
+
+            }
+            return true;
+        }
+        else
+            return false;
+
     }
 
     public List<Order> getOrders() {
         return orderRepository.findAll();
     }
-    public List<Order> getOrdersById(int id) {return orderRepository.findByUserId(id);}
+
+    public List<Order> getOrdersById(int id) {
+        return orderRepository.findByUserId(id);
+    }
+
     public List<OrdersDTO> getAllOrders(){
         List<Object[]> objects = orderRepository.getInfoOrder();
         List<OrdersDTO> ordersDTOS = new ArrayList<>();

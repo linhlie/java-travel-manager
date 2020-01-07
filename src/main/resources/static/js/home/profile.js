@@ -48,9 +48,7 @@
                                 '<img src="'+res.image.imageUrl+'" class="avatar img-circle img-thumbnail" alt="avatar">'+
                                 '<br> <br>'+
                                 '<h4>'+user[3]+'</h4>'+
-                                '<div class="file btn btn-lg btn-primary" style="position: relative;overflow: hidden;">Chọn ảnh đại diện'+
-                                '<input type="file" name="file" style=" position: absolute;font-size: 50px;opacity: 0;right: 0;top: 0;"/>'+
-                                '</div></div>';
+                                '</div>';
                         }
                         $(".profile-image").html(html);
 
@@ -130,5 +128,8 @@
         }
         $(".test_cart").html(htmlCart);
     }
+    $( document ).ready(function() {
+        $('.uploadfile').html('Thay ảnh đại diện');
+    });
 
 })(jQuery);

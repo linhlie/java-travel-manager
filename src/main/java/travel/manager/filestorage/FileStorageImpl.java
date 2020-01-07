@@ -10,21 +10,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
-public class FileStorageImpl implements FileStorage{
-
-	Logger log = LoggerFactory.getLogger(this.getClass().getName());
-	private final Path rootLocation = Paths.get("resources/static/images/user");
-
- 
-	@Override
+public class FileStorageImpl  {
+    private final Path rootLocation = Paths.get("D:\\TTCSCN\\java-travel-manager\\src\\main\\resources\\static\\images\\user");
 	public void store(MultipartFile file){
 		try {
             Path fp = rootLocation;
-            if (!Files.exists(fp)){
-                Files.createDirectory(fp);
-            }
             Path p =fp.resolve(file.getOriginalFilename());
             Files.copy(file.getInputStream(),p);
+
         } catch (Exception e) {
         	throw new RuntimeException("FAIL! -> message = " + e.getMessage());
         }

@@ -3,7 +3,7 @@ package travel.manager.controller.home;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import travel.manager.dto.OrderDetailBillDTO;
 import travel.manager.message.AjaxResponseBody;
@@ -11,11 +11,13 @@ import travel.manager.message.Response;
 import travel.manager.model.admin.User;
 import travel.manager.model.admin.UserDto;
 import travel.manager.model.home.Order;
-import travel.manager.model.home.OrdersDetails;
 import travel.manager.service.admin.UserService;
+
+import travel.manager.model.home.OrderTour;
 import travel.manager.service.home.OrderService;
 import travel.manager.service.home.TourService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -33,17 +35,21 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<?> addOrder(@PathVariable("data") String data) {
         AjaxResponseBody result = new AjaxResponseBody();
-        try {
-            Order order = orderService.addOrder(data);
-            result.setOrder(order);
-            result.setMsg("done");
-            result.setStatus(true);
-
-        } catch (Exception e) {
-            result.setMsg(e.getMessage());
-            result.setStatus(false);
-        }
         return ResponseEntity.ok(result);
+    }
+
+    @PostMapping("/order/tour")
+    public String addOrderTour(@Valid OrderTour orderTour, Model model) {
+        try {
+            if (orderTour!=null) {
+                if (orderService.addOrder(orderTour));{
+                    model.addAttribute("message", "Bạn đã thanh toán thành công!");
+                }
+            }
+        } catch (Exception e) {
+            model.addAttribute("message", "Thất bại!  ");
+        }
+        return "success";
     }
     @RequestMapping(value = "/tour/order/{email}", method = RequestMethod.GET)
     @ResponseBody
@@ -129,4 +135,11 @@ public class OrderController {
         }
         return ResponseEntity.ok(result);
     }
+    @GetMapping("/tour/checkout")
+    public String edit(Model model){
+        model.addAttribute("orderTour", new OrderTour());
+
+        return "home/checkout";
+    }
+
 }

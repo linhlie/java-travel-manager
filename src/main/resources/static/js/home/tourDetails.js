@@ -122,23 +122,6 @@
                     '<div class="row">'+
                     '<div class="col-lg-2 book-tour">'+
                     '<button type="button" class="btn btn-success book"  data-toggle="modal" data-target="#myModal">Book now</button>'+
-                    '<div class="modal" id="myModal">'+
-                    '<div class="modal-dialog">'+
-                    '<div class="modal-content">'+
-                    '<div class="modal-header">'+
-                    '<h4 class="modal-title">'+tour.tourName+'</h4>'+
-                    '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
-                    '</div>'+
-                    '<div class="modal-body">'+
-                    '<ul style="text-align: left;color: black"><li style="margin-bottom: 3px;">Tài khoản: '+_login+'</li>'+
-                    '<li style="margin-bottom: 3px;">Chi phí/ Số người: '+tour.price+'/'+ tour.totalMember+'</li>' +
-                    '<li style="margin-bottom: 3px;">Ngày đi: '+tour.departureDate+'</li>' +
-                    '<li style="margin-bottom: 3px;">Thời gian chuyến đi: '+tour.totalDays+'</li>' +
-                    '<li style="margin-bottom: 3px;">Số người đi:<input type="number" class="total-people" id="total-people"/></li></ul></div>'+
-                    '<div class="modal-footer">'+
-                    '<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy bỏ</button>'+
-                    '<button type="button" class="btn btn-success confirm" data-dismiss="modal">Đồng ý</button>'+
-                    '</div></div></div> </div>'+
                     '</div>' +
                     '<div class="col-lg-2">'+
                     '<button type="button" data-id="'+tour.tourId+'" class="add_cart btn btn-success">Add Cart</button>'+
@@ -152,6 +135,7 @@
 
                 $(document).on("click",".book", function () {
                     if (sessionLogin()) {
+                        window.location.replace("http://localhost:8888/tour/checkout")
                     } else {
                         alert("Bạn cần phải đăng nhập");
                         window.location.replace("http://localhost:8888/login");
@@ -170,36 +154,6 @@
         }
 
         getTourDetails(id, onSuccess, onError);
-    }
-    $(document).on("click",".confirm", function () {
-        var string = [];
-        if ($('.total-people').val().trim() != "") {
-            var total = $('.total-people').val().trim();
-            string.push(total);
-        } else {
-            string.push(_tour.totalMember);
-        }
-        string.push(_tour.tourId);
-        string.push(_login);
-        string.toString();
-        oderTour(string);
-    });
-
-    function oderTour(string) {
-        function onSuccess(response) {
-            if (response && response.status) {
-                console.log(response);
-                alert("Đặt tour thành công!");
-            }
-        }
-
-        function onError(error) {
-            alert("Đặt tour thất bạn!");
-            console.log(error);
-        }
-
-        addOrder(string, onSuccess, onError);
-
     }
 
     function loadListNews() {
