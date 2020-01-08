@@ -11,6 +11,7 @@ import travel.manager.message.TourResponeBody;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.*;
 import travel.manager.repository.admin.UserRepository;
+import travel.manager.repository.home.OrderDetailRepository;
 import travel.manager.service.admin.UserService;
 import travel.manager.service.home.*;
 
@@ -39,6 +40,9 @@ public class TourController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
 
     @GetMapping(value = {"/index","/"})
     public String index(Model model, Principal principal) {
@@ -108,6 +112,11 @@ public class TourController {
             List<Image>imagesTours = imageService.findImageByTourId(id);
             result.setImagesTours(imagesTours);
 
+            String cus = "";
+             if (orderDetailRepository.findTotalCus(Integer.parseInt(String.valueOf(id)))!=null){
+                cus = orderDetailRepository.findTotalCus(Integer.parseInt(String.valueOf(id)));
+             }
+            result.setCus(cus);
             Tour tour = tourService.findOne(id);
             result.setTour(tour);
 

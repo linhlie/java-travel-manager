@@ -38,5 +38,4 @@ public class Tour {
 
     private int totalDays;
 
-    private int country;
 }

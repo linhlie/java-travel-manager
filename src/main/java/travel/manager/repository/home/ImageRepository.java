@@ -15,7 +15,7 @@ public interface ImageRepository extends JpaRepository<Image,Integer> {
     @Query(value = "select * from tour_manager.tour_image,tour_manager.image where tour_image.image_id = image.image_id", nativeQuery = true)
     List<Image> findByTourId();
 
-    @Query(value = "select * from image where image_id in(select image_id from tour_image where tour_id in(SELECT tour_id FROM tour_manager.tour where country=1))", nativeQuery = true)
+    @Query(value = "select * from image where image_id in(select image_id from tour_image where tour_id in(SELECT tour_id FROM tour_manager.tour where category_tour_id=1))", nativeQuery = true)
     List<Image> findImageToursVN();
 
     @Query(value = "select * from tour_manager.place_image,tour_manager.image where place_image.image_id = image.image_id", nativeQuery = true)
@@ -30,7 +30,7 @@ public interface ImageRepository extends JpaRepository<Image,Integer> {
     @Query(value = "select * from user,image where user.image_id = image.image_id", nativeQuery = true)
     List<Image> getImagesUsersComment();
 
-    @Query(value = "select * from image where image_id in(select image_id from tour_image where tour_id in(SELECT tour_id FROM tour_manager.tour where country=2))", nativeQuery = true)
+    @Query(value = "select * from image where image_id in(select image_id from tour_image where tour_id in(SELECT tour_id FROM tour_manager.tour where category_tour_id=2))", nativeQuery = true)
     List<Image> findImageToursNA();
 
     @Query(value = "select * from tour_manager.place_image,tour_manager.image where place_image.image_id = image.image_id and place_image.place_id = :placeId", nativeQuery = true)

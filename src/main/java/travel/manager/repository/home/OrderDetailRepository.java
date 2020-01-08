@@ -26,5 +26,8 @@ public interface OrderDetailRepository extends JpaRepository<OrdersDetails,Integ
             "from orders join orders_details on  orders.orders_id = orders_details.orders_id\n" +
             "where year(orders_date)=:year group by  month(orders_date) ORDER BY thang asc", nativeQuery = true)
     List<Object[]> findTourByYear(int  year);
+
+    @Query(value = "SELECT sum(total_user) AS total_user FROM (select total_user FROM tour_manager.orders_details where tour_id =:id) as t;", nativeQuery = true)
+    String findTotalCus(@Param("id") int id);
 }
 

@@ -20,4 +20,5 @@ public class TourResponeBody {
     private News news;
     private Image image;
     private List<Tour>toursCart;
+    private String cus;
 }

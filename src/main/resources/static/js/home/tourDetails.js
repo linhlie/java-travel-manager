@@ -52,6 +52,10 @@
                 if(_comments.length!=0){
                     loadInfoComments();
                 }
+                var cuss = response.cus;
+                if (cuss==""){
+                    cuss=0;
+                }
                 var html = '<div class="blog_post_image">'+
                     '<div id="demo" class="carousel slide" data-ride="carousel">'+
                     '<ul class="carousel-indicators">'+
@@ -72,14 +76,21 @@
                     '</a></div>'+
                     '</div></div>' +
                     '<br><div class="row">'+
-                    '<div class="col-lg-2">'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img src="images/stats_1.png" alt="">'+
                     '<div class="stats_last_content">'+
                     '<div class="stats_type">Số người</div>'+
                     '<div class="stats_type">'+tour.totalMember+'</div></div></div></div></div>'+
-                    '<div class="col-lg-2">'+
+                    '<div class="col-lg-3">'+
+                    '<div class="stats_last order-md-1 order-3">'+
+                    '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
+                    '<img src="images/stats_1.png" alt="">'+
+                    '<div class="stats_last_content">'+
+                    '<div class="stats_type">Số người đã đăng ký</div>'+
+                    '<div class="stats_type">'+cuss+'</div></div></div></div></div>'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img src="images/stats_2.png" alt="">'+
@@ -87,7 +98,7 @@
                     '<div class="stats_type">Địa điểm</div>'+
                     '<div class="stats_type">'+place.placeName+'</div>'+
                     '</div></div></div></div>' +
-                    '<div class="col-lg-2">'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img style="height: 30px;width: 30px" src="images/icon/calendar.png" alt="">'+
@@ -95,7 +106,7 @@
                     '<div class="stats_type">Ngày đi</div>'+
                     '<div class="stats_type">'+tour.departureDate+'</div></div></div></div>'+
                     '</div>' +
-                    '<div class="col-lg-2">'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img style="height: 30px;width: 30px" src="images/icon/totaldays.png" alt="">'+
@@ -103,7 +114,8 @@
                     '<div class="stats_type">Số ngày đi</div>'+
                     '<div class="stats_type">'+tour.totalDays+'</div></div></div></div>'+
                     '</div>' +
-                    '<div class="col-lg-2">'+
+                    '<br>'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img style="height: 30px;width: 30px" src="images/icon/discount.png" alt="">'+
@@ -111,7 +123,7 @@
                     '<div class="stats_type">Giảm giá</div>'+
                     '<div class="stats_type">'+discount+'%</div></div></div></div>'+
                     '</div>' +
-                    '<div class="col-lg-2">'+
+                    '<div class="col-lg-3">'+
                     '<div class="stats_last order-md-1 order-3">'+
                     '<div class="stats_last_icon d-flex flex-column align-items-center justify-content-end">'+
                     '<img style="height: 30px;width: 30px" src="images/icon/money-bag.png" alt="">'+
