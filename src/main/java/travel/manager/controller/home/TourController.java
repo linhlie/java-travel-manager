@@ -146,7 +146,7 @@ public class TourController {
             Image image = imageService.getImage(id);
             result.setImage(image);
 
-            result.setMsg("Image");
+            result.setMsg("Image-User");
             result.setStatus(true);
         } catch (Exception e) {
             result.setMsg(e.getMessage());

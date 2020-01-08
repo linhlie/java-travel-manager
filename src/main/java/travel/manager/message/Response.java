@@ -19,6 +19,8 @@ public class Response {
 	private List<OrderDetailBillDTO> ordersDetails;
 	private List<Analytics>analytics;
 	private List listMoney;
+	private float[] listMoneys;
+	private String textData;
 
 	
 	public Response(){

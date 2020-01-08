@@ -41,4 +41,7 @@ public interface ImageRepository extends JpaRepository<Image,Integer> {
 
     @Query(value = "select * from tour_manager.image where image_id =:id", nativeQuery = true)
     Image findById(@Param("id") int id);
+
+    @Query(value = "SELECT MAX(image_id) FROM image", nativeQuery = true)
+    int findImageIdMax();
 }

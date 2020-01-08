@@ -25,8 +25,13 @@ public class AnalyticsController {
     public ResponseEntity<?> getRevenue(@PathVariable("year") int year) {
         Response result = new Response();
         try {
-            List analytics= analyticsService.getData(year);
-            result.setListMoney(analytics);
+            String text="";
+            float[] analytics= analyticsService.getData(year);
+            for (int i=1;i<analytics.length;i++){
+                text+=analytics[i]+",";
+            }
+            result.setListMoneys(analytics);
+            result.setTextData(text);
             result.setMsg("revenue");
             result.setStatus(true);
         } catch (Exception e) {

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,12 +18,15 @@ import travel.manager.message.AjaxResponseBody;
 import travel.manager.model.admin.RegisterUser;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.Image;
+import travel.manager.repository.admin.UserRepository;
+import travel.manager.repository.home.ImageRepository;
 import travel.manager.service.admin.UserService;
 import travel.manager.service.home.ImageService;
 
 import javax.validation.Valid;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -36,6 +40,12 @@ public class UsersControllers {
 
     @Autowired
     FileStorageImpl fileStorage;
+
+    @Autowired
+    private ImageRepository imageRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @RequestMapping(value = { "/users/tourDetails" }, method = RequestMethod.GET)
@@ -73,12 +83,20 @@ public class UsersControllers {
         return "redirect:/login";
     }
     @PostMapping("/user/uploadImage")
-    public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model) {
+    public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model, Principal principal) {
         try {
-            fileStorage.store(file);
+            String url = fileStorage.store(file);
+            Image image = new Image();
+            image.setImageName(file.getOriginalFilename());
+            image.setImageUrl(url);
+            imageRepository.save(image);
 
-            Path rootLocation = Paths.get("/images/user");
-            Path p =rootLocation.resolve(file.getOriginalFilename());
+            org.springframework.security.core.userdetails.User loginedUser = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
+            int id = imageRepository.findImageIdMax();
+            User user = userRepository.findByEmail(loginedUser.getUsername());
+            user.setImageId(Long.parseLong(String.valueOf(id)));
+            userRepository.save(user);
+
 
         } catch (Exception e) {
         }

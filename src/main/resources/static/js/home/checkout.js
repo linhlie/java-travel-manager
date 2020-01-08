@@ -33,9 +33,11 @@
         var login = sessionStorage.getItem("login");
         var string = localStorage.getItem(login);
         var orders = localStorage.getItem("orders");
+        console.log(orders)
         if (string==null||string==""){
             $(".test_cart").remove();
             htmlCart="";
+            loadDataCart(orders)
         }
 
         else {
@@ -80,9 +82,14 @@
                 var money=0;
                 var bill ="";
                 var cus =[];
-                cus = localStorage.getItem("cus").split(",");
+                if (localStorage.getItem("cus")!=null&&localStorage.getItem("cus")!=undefined){
+                    cus = localStorage.getItem("cus").split(",");
+                }
                 for (var i=0;i<toursCart.length;i++) {
                     var discount = toursCart[i].discount*100;
+                    if (cus[i]==null||cus[i]==undefined){
+                        cus[i]=1;
+                    }
                     var pay = (toursCart[i].price - toursCart[i].price*toursCart[i].discount)*cus[i];
                     money+=pay;
                     bill+=toursCart[i].tourId+'-'+cus[i]+',';

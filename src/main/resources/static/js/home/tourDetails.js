@@ -135,6 +135,17 @@
 
                 $(document).on("click",".book", function () {
                     if (sessionLogin()) {
+                        var arr =[];
+                        var cart ="";
+                        if (localStorage.getItem(_login)==null||localStorage.getItem(_login)==undefined){
+                            arr.push(id);
+                        }
+                         else {
+                             cart = localStorage.getItem(_login);
+                            arr = cart.split(',');
+                            arr.push(id);
+                        }
+                        localStorage.setItem("orders",arr);
                         window.location.replace("http://localhost:8888/tour/checkout")
                     } else {
                         alert("Bạn cần phải đăng nhập");
