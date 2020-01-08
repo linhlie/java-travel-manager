@@ -110,7 +110,7 @@
 	<!-- Home -->
 
 	<div class="home">
-		<!-- Home Slider -->
+		 Home Slider
 		<div class="home_slider_container">
 
 			<div class="owl-carousel owl-theme home_slider">
@@ -140,7 +140,18 @@
 						</div>
 					</div>
 				</div>
+				<div class="owl-item home_slider_item">
+					<!-- Image by https://unsplash.com/@anikindimitry -->
+					<div class="home_slider_background" style="background-image:url(images/aicap.jpg)"></div>
 
+					<div class="home_slider_content text-center">
+						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
+							<h1>Khám phá</h1>
+							<h1>Ai Cập</h1>
+							<div class="button home_slider_button"><div class="button_bcg"></div><a th:href="@{/tour-vi}">khám phá ngay<span></span><span></span><span></span></a></div>
+						</div>
+					</div>
+				</div>
 				<!-- Slider Item -->
 
 
@@ -165,7 +176,7 @@
 			</div>
 
 			<!-- Home Slider Nav - Next -->
-			<div class="home_slider_nav home_slider_next">
+			<div class="home_slider_nav home_slider_next" id="thebutton">
 				<svg version="1.1" id="Layer_3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 					 width="28px" height="33px" viewBox="0 0 28 33" enable-background="new 0 0 28 33" xml:space="preserve">
 					<defs>
@@ -182,15 +193,9 @@
 				</svg>
 			</div>
 
-			<!-- Home Slider Dots -->
 
-			<div class="home_slider_dots">
-				<ul id="home_slider_custom_dots" class="home_slider_custom_dots">
-					<li class="home_slider_custom_dot active"><div></div>01.</li>
-					<li class="home_slider_custom_dot"><div></div>02.</li>
-				</ul>
-			</div>
 		</div>
+
 	</div>
 	<!-- Search -->
 	<div class="search">
@@ -451,7 +456,13 @@
 <script src="js/custom.js"></script>
 <script src="/js/api.js"></script>
 <script src="js/home/index.js"></script>
+<script>
+	 setInterval(function() {
+				document.getElementById('thebutton').click();
+	}, 3000)
 
+
+</script>
 </body>
 
 </html>
