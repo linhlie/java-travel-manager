@@ -2,6 +2,9 @@ package travel.manager.controller.home;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +21,16 @@ import travel.manager.service.home.OrderService;
 import travel.manager.service.home.TourService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class OrderController {
+
+    @Autowired
+    private JavaMailSender javaMailSender;
+
     @Autowired
     private OrderService orderService;
 
@@ -31,6 +40,10 @@ public class OrderController {
     @Autowired
     private TourService tourService;
 
+    private static char[] confirm;
+
+    OrderTour _orderTour= new OrderTour();
+
     @RequestMapping(value = "/order/tour/{data}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<?> addOrder(@PathVariable("data") String data) {
@@ -38,19 +51,6 @@ public class OrderController {
         return ResponseEntity.ok(result);
     }
 
-    @PostMapping("/order/tour")
-    public String addOrderTour(@Valid OrderTour orderTour, Model model) {
-        try {
-            if (orderTour!=null) {
-                if (orderService.addOrder(orderTour));{
-                    model.addAttribute("message", "Bạn đã thanh toán thành công!");
-                }
-            }
-        } catch (Exception e) {
-            model.addAttribute("message", "Thất bại!  ");
-        }
-        return "success";
-    }
     @RequestMapping(value = "/tour/order/{email}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<?> getOrders(@PathVariable("email") String email) {
@@ -86,12 +86,69 @@ public class OrderController {
         }
         return ResponseEntity.ok(result);
     }
+    static char[] OTP(int len)
+    {
+        String numbers = "0123456789";
+
+        Random rndm_method = new Random();
+
+        char[] otp = new char[len];
+
+        for (int i = 0; i < len; i++)
+        {
+            otp[i] = numbers.charAt(rndm_method.nextInt(numbers.length()));
+        }
+        return otp;
+    }
+    void sendEmail(String subject, String mail, String code) {
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(mail);
+        msg.setSubject(subject);
+        msg.setText(code);
+
+        javaMailSender.send(msg);
+
+    }
+    @PostMapping("/order/tour")
+    public String addOrderTour(@Valid OrderTour orderTour, Model model, Principal principal) {
+        try {
+            if (orderTour!=null) {
+                org.springframework.security.core.userdetails.User loginedUser = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
+                _orderTour = orderTour;
+                confirm = OTP(6);
+                System.out.println(confirm);
+                sendEmail("Send code confirm",loginedUser.getUsername(),"Mã xác nhận của bạn là: "+String.valueOf(confirm));
+            }
+        } catch (Exception e) {
+        }
+        return "redirect:/order/confirm";
+    }
+    @GetMapping("/order/confirm/{confirm}")
+    @ResponseBody
+    public ResponseEntity<?>confirmOrder(@PathVariable ("confirm") String  confirms) {
+        Response response = new Response();
+        if (Integer.parseInt(String.valueOf(confirms))==Integer.parseInt(String.valueOf(confirm))){
+            orderService.addOrder(_orderTour);
+            response.setMsg("done");
+            response.setStatus(true);
+        }
+        else {
+            response.setMsg("false");
+            response.setStatus(false);
+        }
+        return ResponseEntity.ok(response);
+    }
+
     @RequestMapping(value = "/order/getOne/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> getOrdersDetail(@PathVariable("id") int id) {
+    public ResponseEntity<?> getOrdersDetail(@PathVariable("id") int id,Principal principal) {
         AjaxResponseBody result = new AjaxResponseBody();
         try {
             Order order = orderService.getOne(id);
+            org.springframework.security.core.userdetails.User loginedUser = (org.springframework.security.core.userdetails.User) ((Authentication) principal).getPrincipal();
+            sendEmail("Thông báo",loginedUser.getUsername(),"Cảm ơn bạn đã đặt tour tại Travelix, chúng tôi sẽ liên hệ sớm nhất cho bạn!");
+
             result.setMsg("Order");
             result.setStatus(true);
             result.setOrder(order);
@@ -140,6 +197,14 @@ public class OrderController {
         model.addAttribute("orderTour", new OrderTour());
 
         return "home/checkout";
+    }
+    @GetMapping("/order/confirm")
+    public String confirm(Model model){
+        return "confirm";
+    }
+    @GetMapping("/order/success")
+    public String success(Model model){
+        return "success";
     }
 
 }

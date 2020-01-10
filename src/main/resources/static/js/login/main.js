@@ -1,5 +1,33 @@
 
 (function ($) {
+    $(document).on("click",".confirm-code", function () {
+        var content = $("#confirm").val();
+        $("#wrong").attr("style", "display: none;");
+        confirmUser(content)
+        console.log(content)
+        function confirmUser(content) {
+            function onSuccess(res) {
+                if (res&&res.status){
+                    window.location.replace("http://localhost:8888/order/success");
+                }
+                else {
+                    $("#wrong").removeAttr("style", "display: none;");
+                    $("#wrong").attr("style", "    text-align: center;\n" +
+                        "    color: black;\n" +
+                        "    font-size: 20px;\n" +
+                        "    font-weight: bold;");
+
+                }
+
+            }
+            function onError(e) {
+                console.log(e)
+            }
+            getConfirm(content,onSuccess,onError)
+
+        }
+    });
+
     "use strict";
 
     /*==================================================================

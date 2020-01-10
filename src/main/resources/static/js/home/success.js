@@ -7,5 +7,6 @@
         localStorage.clear("cus")
         localStorage.clear("orders")
         localStorage.clear(login);
+
     }
 })(jQuery);

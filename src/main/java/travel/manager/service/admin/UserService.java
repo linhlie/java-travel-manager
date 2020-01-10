@@ -89,7 +89,6 @@ public class UserService {
                     HashSet<Role> roles = new HashSet<>();
                     roles.add(roleRepository.findByName("ROLE_MEMBER"));
                     user.setRoles(roles);
-                    System.out.println(user);
 
                     userRepository.save(user);
                 }

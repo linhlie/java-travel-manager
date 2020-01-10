@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Confirm order tour</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <base href="/"/>
+	<link rel="stylesheet" type="text/css"  th:href="@{css/vendor/bootstrap/css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="plugins/font-awesome-4.7.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="css/vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login/util.css">
+	<link rel="stylesheet" type="text/css" href="css/login/main.css">
+</head>
+<body>
+
+<div class="limiter">
+	<div class="container-login100" style="background-image:url(images/home_slider.jpg)">
+		<div class="wrap-login100 p-l-50 p-r-50 p-t-77 p-b-30">
+            <span class="login100-form-title p-b-55">
+                Confirm
+            </span>
+
+         <div class="wrap-input100 validate-input m-b-16" data-validate = "Confirm Password is required">
+            <input class="input100" type="text" id="confirm" name="confirm"placeholder="Confirm Code"/>
+            <span class="focus-input100"></span>
+            <span class="symbol-input100">
+            <span class="lnr lnr-lock"></span>
+        </span>
+        </div>
+        <div class="wrap-input100 validate-input m-b-16 hidden-class" id="wrong" style="display: none">
+            <span class="focus-input100"></span> Mã xác nhận sai. Vui lòng nhập lại!<span class="symbol-input100">
+        </span>
+        </div>
+        <div class="container-login100-form-btn p-t-25">
+            <button class="login100-form-btn confirm-code ">
+                Confirm
+            </button>
+        </div>
+		</div>
+	</div>
+</div>
+
+<script src="css/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="css/vendor/bootstrap/js/popper.js"></script>
+<script src="css/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="css/vendor/select2/select2.min.js"></script>
+<script src="js/login/main.js"></script>
+<script src="js/api.js"></script>
+
+</body>
+</html>

@@ -116,6 +116,10 @@ function addOrder(data, onSuccess, onError) {
     var url ="/order/tour/"+data;
     _get(url, onSuccess, onError);
 }
+function getConfirm(confirm, onSuccess, onError) {
+    var url ="/order/confirm/"+confirm;
+    _get(url, onSuccess, onError);
+}
 
 function getCart(data, onSuccess, onError) {
     var url ="/tour/cart/"+data;

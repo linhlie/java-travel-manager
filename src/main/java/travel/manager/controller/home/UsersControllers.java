@@ -15,6 +15,7 @@ import travel.manager.dto.UserRequest;
 import travel.manager.filestorage.FileStorage;
 import travel.manager.filestorage.FileStorageImpl;
 import travel.manager.message.AjaxResponseBody;
+import travel.manager.message.Response;
 import travel.manager.model.admin.RegisterUser;
 import travel.manager.model.admin.User;
 import travel.manager.model.home.Image;
@@ -28,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.Principal;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class UsersControllers {
@@ -77,11 +79,12 @@ public class UsersControllers {
 
     @PostMapping("/register")
     public String register(@Valid RegisterUser registerUser, Model model) {
+        Response res = new Response();
         if(userService.addUser(registerUser)){
-            System.out.println("OK");
         }
         return "redirect:/login";
     }
+
     @PostMapping("/user/uploadImage")
     public String uploadMultipartFile(@RequestParam("uploadfile") MultipartFile file, Model model, Principal principal) {
         try {

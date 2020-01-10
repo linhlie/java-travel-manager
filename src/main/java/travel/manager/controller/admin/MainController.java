@@ -52,6 +52,10 @@ public class MainController {
 		model.addAttribute("registerUser", new RegisterUser());
 		return "register";
 	}
+	@GetMapping("/register/confirm")
+	public String confirmRegister(Model model) {
+		return "confirm";
+	}
 
 	@RequestMapping(value = { "/index/users"}, method = RequestMethod.GET)
 	@ResponseBody

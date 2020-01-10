@@ -14,15 +14,27 @@
 <body>
 <div style="text-align: center;
     margin-top: 100px;">
-    <div class="success" th:if="${message}"
+    <div class="success"
      style="
     font-weight: bold;
     font-size: 20px;
     color: brown;">
-        <span th:text="${message}"/>
+       <span id="sucess">Bạn đã đặt tour thành công</span>
+    </div>
+    <div class="success"
+     style="
+    font-weight: bold;
+    font-size: 20px;
+    color: brown;">Chúng tôi sẽ liên hệ sớm nhất cho bạn
     </div>
     <a href="/index"><button type="button" class="btn btn-primary">Trở Về</button></a>
 </div>
+<script type="">
+    $(window).on('beforeunload', function(){
+        window.location()
+
+    });
+</script>
 <script src="plugins/js/jquery-3.2.1.min.js"></script>
 <script src="plugins/bootstrap4/popper.js"></script>
 <script src="plugins/bootstrap4/bootstrap.min.js"></script>

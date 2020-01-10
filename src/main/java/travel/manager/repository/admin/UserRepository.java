@@ -20,5 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	@Query(value = "select * from tour_manager.user", nativeQuery = true)
 	List<User> findAlls();
-
+	@Query(value = "SELECT * FROM tour_manager.user where id =(SELECT MAX(id) FROM tour_manager.user)", nativeQuery = true)
+    int findIdMax();
 }
